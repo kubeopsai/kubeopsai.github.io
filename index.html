@@ -43,7 +43,8 @@
       justify-content: space-between;
       height: 60px;
     }
-    .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+    .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.1rem; color: var(--text); }
+    .nav-logo img { height: 32px; width: auto; }
     .nav-logo span { color: var(--accent); }
     .nav-links { display: flex; gap: 2rem; }
     .nav-links a { color: var(--muted); font-size: 0.9rem; }
@@ -213,7 +214,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Kube<span>Ops</span>AI</div>
+  <div class="nav-logo"><img src="logo.png" alt="KubeOpsAI"/>Kube<span>Ops</span>AI</div>
   <div class="nav-links">
     <a href="#product">Product</a>
     <a href="#pricing">Pricing</a>
@@ -225,6 +226,7 @@
 
 <!-- HERO -->
 <div class="hero">
+  <img src="logo.png" alt="KubeOpsAI" style="height:80px;width:auto;margin-bottom:1.5rem;"/>
   <div class="hero-badge">Available on AWS Marketplace</div>
   <h1>Kubernetes Observability<br/>for <span>AI Assistants</span></h1>
   <p>Give Amazon Q, Claude, and Bedrock agents read-only access to your cluster's logs, metrics, traces, and AWS infrastructure — via a single Helm install.</p>
