@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KubeOpsAI — Kubernetes Observability for AI Assistants</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #f78166;
+      --accent2: #79c0ff;
+      --green: #56d364;
+      --radius: 8px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,17,23,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: var(--muted); font-size: 0.9rem; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* SECTIONS */
+    section { padding: 80px 2rem; max-width: 900px; margin: 0 auto; }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 100px 2rem 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(247,129,102,0.1);
+      border: 1px solid rgba(247,129,102,0.3);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 span { color: var(--accent2); }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.85; text-decoration: none; }
+    .btn-primary { background: var(--accent2); color: #0d1117; }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+
+    /* SECTION HEADINGS */
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+
+    /* PRODUCT */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .card-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .card p { font-size: 0.875rem; color: var(--muted); }
+
+    /* PROMPTS */
+    .prompts {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+    }
+    .prompts ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .prompts li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .prompts li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+      font-weight: 700;
+    }
+    .prompts li em { color: var(--text); font-style: normal; }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .pricing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+    .pricing-card.featured { border-color: var(--accent2); }
+    .pricing-tier { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.5rem; }
+    .pricing-price { font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .pricing-price span { font-size: 0.9rem; font-weight: 400; color: var(--muted); }
+    .pricing-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.25rem; }
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .pricing-features li { font-size: 0.875rem; color: var(--muted); padding-left: 1.2rem; position: relative; }
+    .pricing-features li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+
+    /* SUPPORT */
+    .support-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .support-table th, .support-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .support-table th { color: var(--muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .support-table tr:last-child td { border-bottom: none; }
+
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+    }
+    .contact-card .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.4rem; }
+    .contact-card .value { font-size: 0.95rem; }
+
+    /* ABOUT */
+    .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    @media (max-width: 600px) { .about-content { grid-template-columns: 1fr; } }
+    .about-content p { color: var(--muted); font-size: 0.95rem; }
+
+    /* DIVIDER */
+    hr { border: none; border-top: 1px solid var(--border); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Kube<span>Ops</span>AI</div>
+  <div class="nav-links">
+    <a href="#product">Product</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#support">Support</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Available on AWS Marketplace</div>
+  <h1>Kubernetes Observability<br/>for <span>AI Assistants</span></h1>
+  <p>Give Amazon Q, Claude, and Bedrock agents read-only access to your cluster's logs, metrics, traces, and AWS infrastructure — via a single Helm install.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank">Get it on AWS Marketplace</a>
+    <a class="btn btn-secondary" href="https://github.com/kubeopsai/k8s-telemetry-mcp" target="_blank">View on GitHub</a>
+  </div>
+</div>
+
+<!-- PRODUCT -->
+<section id="product">
+  <h2>K8s Telemetry MCP Server</h2>
+  <p class="section-sub">22 read-only tools across 6 categories. Deployed as a Helm chart on your existing EKS cluster.</p>
+
+  <div class="product-grid">
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <h3>Logs</h3>
+      <p>Query and analyze pod logs via Loki. Pattern detection, error categorization, and actionable recommendations.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📈</div>
+      <h3>Metrics</h3>
+      <p>PromQL queries and cluster health via Prometheus. CPU, memory, restarts, network, and SLO compliance.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <h3>Traces</h3>
+      <p>Distributed trace search and retrieval via Grafana Tempo. Find slow requests and error traces instantly.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Analytics</h3>
+      <p>Incident timelines, SLO checks, cost attribution, and alert enrichment — correlating data across all sources.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">☸️</div>
+      <h3>Kubernetes</h3>
+      <p>Events, recent deployments, HPA scaling history, and node pressure — direct from the Kubernetes API.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">☁️</div>
+      <h3>AWS</h3>
+      <p>CloudTrail audit logs, ECR vulnerability scanning, RDS Performance Insights, and ElastiCache metrics.</p>
+    </div>
+  </div>
+
+  <div class="prompts" style="margin-top: 2rem;">
+    <p style="font-size:0.85rem; color:var(--muted); margin-bottom:1rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Ask your AI assistant questions like</p>
+    <ul>
+      <li><em>"Why did the payment pod crash in the last hour?"</em></li>
+      <li><em>"Is the checkout service meeting its 99.9% SLO this week?"</em></li>
+      <li><em>"Which namespace is consuming the most resources?"</em></li>
+      <li><em>"Who deleted the payment-service deployment?"</em></li>
+      <li><em>"Which ECR images have critical vulnerabilities?"</em></li>
+      <li><em>"Why is my pod pending? Show me the Kubernetes events."</em></li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:1rem;">
+    <h3 style="margin-bottom:0.5rem;">🔒 Security First</h3>
+    <p>All 22 tools are strictly read-only. All data is automatically sanitized — PII, secrets, tokens, and credentials are redacted before reaching your AI assistant. Communicates over stdio via <code style="background:#0d1117;padding:2px 6px;border-radius:4px;font-size:0.85em;">kubectl exec</code> — no ingress, no API keys, no new attack surface.</p>
+  </div>
+</section>
+
+<hr/>
+
+<!-- PRICING -->
+<section id="pricing">
+  <h2>Pricing</h2>
+  <p class="section-sub">Available on AWS Marketplace. Pay with your existing AWS committed spend — charges appear on your monthly AWS invoice.</p>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-tier">Standard</div>
+      <div class="pricing-price">$29<span>/month</span></div>
+      <div class="pricing-desc">Core observability for small teams</div>
+      <ul class="pricing-features">
+        <li>1 namespace</li>
+        <li>100 log lines per query</li>
+        <li>9 core tools</li>
+        <li>Logs, metrics, traces</li>
+        <li>Kubernetes events</li>
+      </ul>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-tier" style="color:var(--accent2);">Professional</div>
+      <div class="pricing-price">$99<span>/month</span></div>
+      <div class="pricing-desc">Full observability for production teams</div>
+      <ul class="pricing-features">
+        <li>Unlimited namespaces</li>
+        <li>500 log lines per query</li>
+        <li>20 tools</li>
+        <li>All Standard features</li>
+        <li>Analytics, AWS, HPA, Alertmanager</li>
+      </ul>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Enterprise</div>
+      <div class="pricing-price">$299<span>/month</span></div>
+      <div class="pricing-desc">Maximum capability with SLA support</div>
+      <ul class="pricing-features">
+        <li>Unlimited namespaces</li>
+        <li>5000 log lines per query</li>
+        <li>All 22 tools</li>
+        <li>72-hour query range</li>
+        <li>AWS Config compliance tools</li>
+        <li>1 business day SLA</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- SUPPORT -->
+<section id="support">
+  <h2>Support</h2>
+  <p class="section-sub">Business hours: Monday–Friday, 09:00–18:00 CET.</p>
+
+  <div class="card">
+    <table class="support-table">
+      <thead>
+        <tr>
+          <th>Tier</th>
+          <th>First Response</th>
+          <th>Target Resolution</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Standard ($29/mo)</td>
+          <td>5 business days</td>
+          <td>Best effort</td>
+        </tr>
+        <tr>
+          <td>Professional ($99/mo)</td>
+          <td>2 business days</td>
+          <td>5 business days</td>
+        </tr>
+        <tr>
+          <td>Enterprise ($299/mo)</td>
+          <td>1 business day</td>
+          <td>3 business days</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="label">Email Support</div>
+      <div class="value"><a href="mailto:support@kubeopsai.net">support@kubeopsai.net</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="label">Bug Reports & Feature Requests</div>
+      <div class="value"><a href="https://github.com/kubeopsai/k8s-telemetry-mcp/issues" target="_blank">GitHub Issues</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="label">Documentation</div>
+      <div class="value"><a href="https://github.com/kubeopsai/k8s-telemetry-mcp/wiki" target="_blank">GitHub Wiki</a></div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Us</h2>
+  <p class="section-sub">KubeOpsAI builds Kubernetes observability tooling for AI assistants.</p>
+
+  <div class="about-content">
+    <div>
+      <p>We build tooling that connects AI assistants to Kubernetes clusters, enabling engineering teams to query their observability stack using natural language instead of manually navigating dashboards.</p>
+    </div>
+    <div>
+      <p>Our flagship product, K8s Telemetry MCP Server, implements the Model Context Protocol (MCP) — an open standard that allows AI assistants like Amazon Q, Claude, and Bedrock agents to call external tools and retrieve structured data.</p>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+  <p class="section-sub">Get in touch for sales inquiries, support, or general questions.</p>
+
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="label">General Inquiries</div>
+      <div class="value"><a href="mailto:hello@kubeopsai.net">hello@kubeopsai.net</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="label">Technical Support</div>
+      <div class="value"><a href="mailto:support@kubeopsai.net">support@kubeopsai.net</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="label">Website</div>
+      <div class="value"><a href="https://kubeopsai.net">kubeopsai.net</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="label">GitHub</div>
+      <div class="value"><a href="https://github.com/kubeopsai" target="_blank">github.com/kubeopsai</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 KubeOpsAI · <a href="mailto:hello@kubeopsai.net">hello@kubeopsai.net</a> · <a href="https://github.com/kubeopsai/k8s-telemetry-mcp" target="_blank">GitHub</a> · <a href="https://aws.amazon.com/marketplace" target="_blank">AWS Marketplace</a></p>
+</footer>
+
+</body>
+</html>
