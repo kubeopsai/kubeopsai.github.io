@@ -3,366 +3,226 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KubeOpsAI — Kubernetes Observability for AI Assistants</title>
-
-  <!-- SEO -->
-  <meta name="description" content="K8s Telemetry MCP Server connects Amazon Q, Claude, and Bedrock agents to your Kubernetes cluster's logs, metrics, traces, and AWS infrastructure via a single Helm install." />
-  <meta name="keywords" content="Kubernetes, MCP, observability, Loki, Prometheus, Tempo, Amazon Q, Claude, Bedrock, EKS, DevOps, AI" />
-
-  <!-- Open Graph -->
+  <title>KubeOpsAI — Kubernetes Observability &amp; Autonomous Incident Response</title>
+  <meta name="description" content="Free MCP server gives AI assistants read-only access to your Kubernetes cluster. Promtops Agent automates 3 AM incident response — Alertmanager to Slack RCA in under 60 seconds." />
+  <meta name="keywords" content="Kubernetes, MCP, observability, Loki, Prometheus, Tempo, Amazon Q, Claude, Bedrock, EKS, DevOps, AI, incident response, Alertmanager, Slack" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kubeopsai.net/" />
-  <meta property="og:title" content="KubeOpsAI — Kubernetes Observability for AI Assistants" />
-  <meta property="og:description" content="Give Amazon Q, Claude, and Bedrock agents read-only access to your Kubernetes cluster's observability stack via a single Helm install." />
+  <meta property="og:title" content="KubeOpsAI — Kubernetes Observability &amp; Autonomous Incident Response" />
+  <meta property="og:description" content="Free MCP server for AI assistants. Promtops Agent automates 3 AM incident response — Alertmanager to Slack RCA in under 60 seconds." />
   <meta property="og:image" content="https://kubeopsai.net/logo.png" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="KubeOpsAI — Kubernetes Observability for AI Assistants" />
-  <meta name="twitter:description" content="Give Amazon Q, Claude, and Bedrock agents read-only access to your Kubernetes cluster's observability stack via a single Helm install." />
+  <meta name="twitter:title" content="KubeOpsAI — Kubernetes Observability &amp; Autonomous Incident Response" />
+  <meta name="twitter:description" content="Free MCP server for AI assistants. Promtops Agent automates 3 AM incident response." />
   <meta name="twitter:image" content="https://kubeopsai.net/logo.png" />
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:        #080e1a;
-      --bg2:       #0d1526;
-      --surface:   #111d33;
-      --surface2:  #162240;
-      --border:    #1e2f4d;
-      --border2:   #243659;
-      --text:      #e8eef8;
-      --muted:     #7a8fad;
-      --muted2:    #5a6f8a;
-      --amber:     #f59e0b;
-      --amber-dim: rgba(245,158,11,0.12);
-      --amber-bdr: rgba(245,158,11,0.25);
-      --teal:      #2dd4bf;
-      --teal-dim:  rgba(45,212,191,0.08);
-      --green:     #34d399;
-      --radius:    10px;
-      --radius-lg: 16px;
+      --bg:#080e1a; --bg2:#0d1526; --surface:#111d33; --surface2:#162240;
+      --border:#1e2f4d; --border2:#243659; --text:#e8eef8; --muted:#7a8fad;
+      --muted2:#5a6f8a; --amber:#f59e0b; --amber-dim:rgba(245,158,11,0.12);
+      --amber-bdr:rgba(245,158,11,0.25); --teal:#2dd4bf; --teal-dim:rgba(45,212,191,0.08);
+      --green:#34d399; --red:#f87171; --purple:#a78bfa; --purple-dim:rgba(167,139,250,0.1);
+      --radius:10px; --radius-lg:16px;
     }
-
     html { scroll-behavior: smooth; }
+    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+    a { color:var(--teal); text-decoration:none; }
+    a:hover { text-decoration:underline; }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
+    /* NAV */
+    nav { position:sticky; top:0; z-index:200; background:rgba(8,14,26,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:0 clamp(1rem,4vw,2.5rem); display:flex; align-items:center; justify-content:space-between; height:64px; }
+    .nav-logo { display:flex; align-items:center; gap:0.6rem; font-weight:700; font-size:clamp(0.9rem,2vw,1.05rem); color:var(--text); letter-spacing:-0.01em; flex-shrink:0; }
+    .nav-logo img { height:32px; width:auto; }
+    .nav-logo-text span { color:var(--amber); }
+    .nav-links { display:flex; gap:clamp(1rem,2.5vw,2.5rem); align-items:center; }
+    .nav-links a { color:var(--muted); font-size:0.875rem; font-weight:500; transition:color 0.15s; white-space:nowrap; }
+    .nav-links a:hover { color:var(--text); text-decoration:none; }
+    .nav-cta { background:var(--amber) !important; color:#080e1a !important; padding:7px 16px; border-radius:var(--radius); font-weight:600 !important; font-size:0.82rem !important; }
+    .nav-cta:hover { opacity:0.88; }
+    .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+    .nav-hamburger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; transition:all 0.25s; }
+    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity:0; }
+    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .nav-drawer { display:none; position:fixed; top:64px; left:0; right:0; background:rgba(8,14,26,0.98); border-bottom:1px solid var(--border); padding:1.25rem clamp(1rem,4vw,2.5rem); flex-direction:column; gap:0.25rem; z-index:199; }
+    .nav-drawer.open { display:flex; }
+    .nav-drawer a { color:var(--muted); font-size:1rem; font-weight:500; padding:0.65rem 0; border-bottom:1px solid var(--border); transition:color 0.15s; }
+    .nav-drawer a:last-child { border-bottom:none; }
+    .nav-drawer a:hover { color:var(--text); text-decoration:none; }
+    .nav-drawer .nav-cta { margin-top:0.5rem; text-align:center; padding:10px 16px; border-radius:var(--radius); }
 
-    a { color: var(--teal); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    /* HERO */
+    .hero-wrap { position:relative; overflow:hidden; background:linear-gradient(160deg,#080e1a 0%,#0a1628 40%,#0d1e3a 100%); border-bottom:1px solid var(--border); }
+    .hero-wrap::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 70% 40%,rgba(45,212,191,0.06) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 20% 80%,rgba(245,158,11,0.05) 0%,transparent 70%); pointer-events:none; }
+    .hero { position:relative; max-width:860px; margin:0 auto; padding:clamp(56px,10vw,96px) clamp(1rem,4vw,2.5rem) clamp(48px,8vw,88px); text-align:center; }
+    .hero-badge { display:inline-flex; align-items:center; gap:0.4rem; background:var(--amber-dim); border:1px solid var(--amber-bdr); color:var(--amber); font-size:0.72rem; font-weight:600; padding:5px 14px; border-radius:20px; margin-bottom:1.75rem; letter-spacing:0.06em; text-transform:uppercase; }
+    .hero-badge::before { content:'●'; font-size:0.45rem; }
+    .hero h1 { font-size:clamp(1.75rem,5vw,3.4rem); font-weight:800; line-height:1.15; letter-spacing:-0.03em; margin-bottom:1.25rem; }
+    .hero h1 em { font-style:normal; background:linear-gradient(90deg,var(--teal),#60a5fa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-sub { font-size:clamp(0.95rem,2vw,1.1rem); color:var(--muted); max-width:600px; margin:0 auto 2.75rem; line-height:1.7; }
+    .hero-cta { display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap; }
+    .btn { display:inline-block; padding:11px 24px; border-radius:var(--radius); font-size:clamp(0.85rem,2vw,0.925rem); font-weight:600; transition:all 0.15s; cursor:pointer; white-space:nowrap; }
+    .btn:hover { text-decoration:none; transform:translateY(-1px); }
+    .btn-primary { background:var(--amber); color:#080e1a; }
+    .btn-primary:hover { background:#fbbf24; }
+    .btn-secondary { background:transparent; color:var(--text); border:1px solid var(--border2); }
+    .btn-secondary:hover { border-color:var(--muted2); background:var(--surface); }
+    .btn-purple { background:var(--purple); color:#080e1a; }
+    .btn-purple:hover { opacity:0.88; }
 
-    /* ── NAV ── */
-    nav {
-      position: sticky; top: 0; z-index: 200;
-      background: rgba(8,14,26,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 clamp(1rem, 4vw, 2.5rem);
-      display: flex; align-items: center; justify-content: space-between;
-      height: 64px;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 0.6rem;
-      font-weight: 700; font-size: clamp(0.9rem, 2vw, 1.05rem);
-      color: var(--text); letter-spacing: -0.01em; flex-shrink: 0;
-    }
-    .nav-logo img { height: 32px; width: auto; }
-    .nav-logo-text span { color: var(--amber); }
-    .nav-links { display: flex; gap: clamp(1rem, 2.5vw, 2.5rem); align-items: center; }
-    .nav-links a { color: var(--muted); font-size: 0.875rem; font-weight: 500; transition: color 0.15s; white-space: nowrap; }
-    .nav-links a:hover { color: var(--text); text-decoration: none; }
-    .nav-cta {
-      background: var(--amber) !important; color: #080e1a !important;
-      padding: 7px 16px; border-radius: var(--radius);
-      font-weight: 600 !important; font-size: 0.82rem !important;
-    }
-    .nav-cta:hover { opacity: 0.88; }
+    /* TWO PRODUCT CARDS */
+    .products-wrap { max-width:960px; margin:0 auto; padding:clamp(48px,8vw,80px) clamp(1rem,4vw,2.5rem); }
+    .products-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+    .product-card { border-radius:var(--radius-lg); border:1px solid var(--border2); overflow:hidden; display:flex; flex-direction:column; }
+    .product-card.free { border-color:var(--border2); }
+    .product-card.paid { border-color:var(--amber); background:linear-gradient(160deg,var(--surface2) 0%,var(--surface) 100%); }
+    .product-card-header { padding:1.75rem 1.75rem 1.25rem; }
+    .product-tag { display:inline-block; font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; padding:3px 10px; border-radius:20px; margin-bottom:1rem; }
+    .tag-free { background:rgba(45,212,191,0.12); color:var(--teal); border:1px solid rgba(45,212,191,0.25); }
+    .tag-paid { background:var(--amber-dim); color:var(--amber); border:1px solid var(--amber-bdr); }
+    .product-card h3 { font-size:1.2rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:0.5rem; }
+    .product-card .product-desc { font-size:0.875rem; color:var(--muted); line-height:1.65; }
+    .product-card-body { padding:0 1.75rem 1.75rem; flex:1; display:flex; flex-direction:column; gap:1.25rem; }
+    .product-price { font-size:2rem; font-weight:800; letter-spacing:-0.03em; }
+    .product-price span { font-size:0.9rem; font-weight:400; color:var(--muted); }
+    .product-features { list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
+    .product-features li { font-size:0.85rem; color:var(--muted); padding-left:1.4rem; position:relative; }
+    .product-features li::before { content:'✓'; position:absolute; left:0; color:var(--green); font-weight:700; }
+    .product-card .btn { margin-top:auto; text-align:center; }
 
-    /* Hamburger */
-    .nav-hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: pointer; padding: 4px; background: none; border: none;
-    }
-    .nav-hamburger span {
-      display: block; width: 22px; height: 2px;
-      background: var(--text); border-radius: 2px;
-      transition: all 0.25s;
-    }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    /* SECTIONS */
+    .section { padding:clamp(48px,8vw,88px) clamp(1rem,4vw,2.5rem); max-width:960px; margin:0 auto; }
+    .section-label { font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin-bottom:0.6rem; }
+    .section h2 { font-size:clamp(1.4rem,3vw,1.75rem); font-weight:800; letter-spacing:-0.02em; margin-bottom:0.6rem; }
+    .section-sub { color:var(--muted); font-size:clamp(0.9rem,2vw,1rem); margin-bottom:2.5rem; max-width:600px; }
 
-    /* Mobile nav drawer */
-    .nav-drawer {
-      display: none; position: fixed;
-      top: 64px; left: 0; right: 0;
-      background: rgba(8,14,26,0.98);
-      border-bottom: 1px solid var(--border);
-      padding: 1.25rem clamp(1rem, 4vw, 2.5rem);
-      flex-direction: column; gap: 0.25rem;
-      z-index: 199;
-    }
-    .nav-drawer.open { display: flex; }
-    .nav-drawer a {
-      color: var(--muted); font-size: 1rem; font-weight: 500;
-      padding: 0.65rem 0; border-bottom: 1px solid var(--border);
-      transition: color 0.15s;
-    }
-    .nav-drawer a:last-child { border-bottom: none; }
-    .nav-drawer a:hover { color: var(--text); text-decoration: none; }
-    .nav-drawer .nav-cta {
-      margin-top: 0.5rem; text-align: center;
-      padding: 10px 16px; border-radius: var(--radius);
-    }
+    /* FLOW DIAGRAM */
+    .flow { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:0; margin:2rem 0; }
+    .flow-step { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius); padding:0.85rem 1.25rem; text-align:center; min-width:120px; }
+    .flow-step .flow-icon { font-size:1.4rem; margin-bottom:0.3rem; }
+    .flow-step .flow-label { font-size:0.75rem; font-weight:600; color:var(--text); }
+    .flow-step .flow-sub { font-size:0.68rem; color:var(--muted); margin-top:0.15rem; }
+    .flow-arrow { color:var(--muted2); font-size:1.2rem; padding:0 0.5rem; flex-shrink:0; }
 
-    /* ── HERO ── */
-    .hero-wrap {
-      position: relative; overflow: hidden;
-      background: linear-gradient(160deg, #080e1a 0%, #0a1628 40%, #0d1e3a 100%);
-      border-bottom: 1px solid var(--border);
-    }
-    .hero-wrap::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(45,212,191,0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(245,158,11,0.05) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero {
-      position: relative; max-width: 860px; margin: 0 auto;
-      padding: clamp(56px, 10vw, 96px) clamp(1rem, 4vw, 2.5rem) clamp(48px, 8vw, 88px);
-      text-align: center;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      background: var(--amber-dim); border: 1px solid var(--amber-bdr);
-      color: var(--amber); font-size: 0.72rem; font-weight: 600;
-      padding: 5px 14px; border-radius: 20px; margin-bottom: 1.75rem;
-      letter-spacing: 0.06em; text-transform: uppercase;
-    }
-    .hero-badge::before { content: '●'; font-size: 0.45rem; }
-    .hero h1 {
-      font-size: clamp(1.75rem, 5vw, 3.4rem);
-      font-weight: 800; line-height: 1.15;
-      letter-spacing: -0.03em; margin-bottom: 1.25rem;
-    }
-    .hero h1 em {
-      font-style: normal;
-      background: linear-gradient(90deg, var(--teal), #60a5fa);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--muted);
-      max-width: 580px; margin: 0 auto 2.75rem; line-height: 1.7;
-    }
-    .hero-cta { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      display: inline-block; padding: 11px 24px;
-      border-radius: var(--radius); font-size: clamp(0.85rem, 2vw, 0.925rem);
-      font-weight: 600; transition: all 0.15s; cursor: pointer;
-      white-space: nowrap;
-    }
-    .btn:hover { text-decoration: none; transform: translateY(-1px); }
-    .btn-primary { background: var(--amber); color: #080e1a; }
-    .btn-primary:hover { background: #fbbf24; }
-    .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border2); }
-    .btn-secondary:hover { border-color: var(--muted2); background: var(--surface); }
+    /* FEATURE GRID */
+    .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; }
+    .feature-card { background:var(--surface); padding:clamp(1.25rem,3vw,1.75rem); transition:background 0.2s; }
+    .feature-card:hover { background:var(--surface2); }
+    .feature-icon { width:40px; height:40px; background:var(--teal-dim); border:1px solid rgba(45,212,191,0.15); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; margin-bottom:1rem; }
+    .feature-card h3 { font-size:0.975rem; font-weight:700; margin-bottom:0.4rem; }
+    .feature-card p { font-size:0.85rem; color:var(--muted); line-height:1.6; }
 
-    /* ── SECTIONS ── */
-    .section {
-      padding: clamp(48px, 8vw, 88px) clamp(1rem, 4vw, 2.5rem);
-      max-width: 960px; margin: 0 auto;
-    }
-    .section-label {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--amber); margin-bottom: 0.6rem;
-    }
-    .section h2 {
-      font-size: clamp(1.4rem, 3vw, 1.75rem); font-weight: 800;
-      letter-spacing: -0.02em; margin-bottom: 0.6rem;
-    }
-    .section-sub { color: var(--muted); font-size: clamp(0.9rem, 2vw, 1rem); margin-bottom: 2.5rem; max-width: 600px; }
+    /* TERMINAL */
+    .terminal { background:#060c18; border:1px solid var(--border2); border-radius:var(--radius-lg); overflow:hidden; margin-top:2rem; }
+    .terminal-bar { background:var(--surface); border-bottom:1px solid var(--border); padding:0.6rem 1rem; display:flex; align-items:center; gap:0.4rem; }
+    .terminal-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+    .terminal-dot:nth-child(1) { background:#ff5f57; }
+    .terminal-dot:nth-child(2) { background:#febc2e; }
+    .terminal-dot:nth-child(3) { background:#28c840; }
+    .terminal-title { margin-left:auto; margin-right:auto; font-size:0.72rem; color:var(--muted2); font-family:'JetBrains Mono',monospace; }
+    .terminal-body { padding:clamp(1rem,3vw,1.5rem) clamp(1rem,3vw,1.75rem); overflow-x:auto; }
+    .terminal-body p { font-family:'JetBrains Mono',monospace; font-size:clamp(0.72rem,1.5vw,0.82rem); line-height:2; color:var(--muted); white-space:nowrap; }
+    .terminal-body p::before { content:'$ '; color:var(--teal); font-weight:500; }
+    .terminal-body p em { font-style:normal; color:#e8eef8; }
 
-    /* ── FEATURE GRID ── */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-      gap: 1px; background: var(--border);
-      border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
+    /* SLACK MOCK */
+    .slack-mock { background:#1a1d21; border:1px solid #2d3136; border-radius:var(--radius-lg); overflow:hidden; margin-top:2rem; font-family:'Inter',sans-serif; }
+    .slack-header { background:#19171d; border-bottom:1px solid #2d3136; padding:0.75rem 1.25rem; display:flex; align-items:center; gap:0.6rem; }
+    .slack-header-dot { width:8px; height:8px; border-radius:50%; }
+    .slack-channel { font-size:0.82rem; font-weight:600; color:#d1d2d3; margin-left:0.25rem; }
+    .slack-body { padding:1.25rem 1.5rem; display:flex; flex-direction:column; gap:0.5rem; }
+    .slack-msg-header { display:flex; align-items:center; gap:0.6rem; margin-bottom:0.25rem; }
+    .slack-avatar { width:32px; height:32px; border-radius:6px; background:linear-gradient(135deg,var(--amber),#f97316); display:flex; align-items:center; justify-content:center; font-size:0.9rem; flex-shrink:0; }
+    .slack-sender { font-size:0.875rem; font-weight:700; color:#d1d2d3; }
+    .slack-time { font-size:0.72rem; color:#6b7280; }
+    .slack-app-badge { font-size:0.62rem; background:#1264a3; color:#fff; padding:1px 5px; border-radius:3px; font-weight:600; }
+    .slack-block-header { background:#1d2226; border-left:4px solid var(--red); border-radius:0 6px 6px 0; padding:0.85rem 1rem; margin-bottom:0.5rem; }
+    .slack-block-header .alert-title { font-size:1rem; font-weight:700; color:#d1d2d3; margin-bottom:0.4rem; }
+    .slack-fields { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-bottom:0.5rem; }
+    .slack-field { background:#222529; border-radius:4px; padding:0.5rem 0.75rem; }
+    .slack-field-label { font-size:0.68rem; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.15rem; }
+    .slack-field-value { font-size:0.82rem; color:#d1d2d3; font-weight:500; }
+    .slack-section { font-size:0.82rem; color:#9ca3af; line-height:1.6; padding:0.5rem 0; border-top:1px solid #2d3136; }
+    .slack-section strong { color:#d1d2d3; }
+    .slack-footer { font-size:0.72rem; color:#6b7280; padding-top:0.5rem; border-top:1px solid #2d3136; font-style:italic; }
+
+    /* SECURITY BANNER */
+    .security-banner { margin-top:1.5rem; background:var(--surface); border:1px solid var(--border2); border-left:3px solid var(--teal); border-radius:var(--radius); padding:1.25rem 1.5rem; display:flex; gap:1rem; align-items:flex-start; }
+    .security-banner .icon { font-size:1.2rem; flex-shrink:0; margin-top:1px; }
+    .security-banner p { font-size:0.875rem; color:var(--muted); line-height:1.65; }
+    .security-banner p strong { color:var(--text); }
+
+    /* DIVIDER */
+    .divider { border:none; border-top:1px solid var(--border); }
+
+    /* PRICING */
+    .pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:1.25rem; }
+    .pricing-card { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:clamp(1.5rem,3vw,2rem); display:flex; flex-direction:column; transition:border-color 0.2s; }
+    .pricing-card:hover { border-color:var(--muted2); }
+    .pricing-card.featured { border-color:var(--amber); background:linear-gradient(160deg,var(--surface2) 0%,var(--surface) 100%); }
+    .pricing-badge { display:inline-block; background:var(--amber-dim); border:1px solid var(--amber-bdr); color:var(--amber); font-size:0.7rem; font-weight:700; padding:2px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:1rem; align-self:flex-start; }
+    .pricing-tier { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--muted); margin-bottom:0.5rem; }
+    .pricing-price { font-size:clamp(1.8rem,4vw,2.4rem); font-weight:800; letter-spacing:-0.03em; margin-bottom:0.2rem; }
+    .pricing-price span { font-size:0.9rem; font-weight:400; color:var(--muted); }
+    .pricing-desc { font-size:0.85rem; color:var(--muted); margin-bottom:1.5rem; }
+    .pricing-divider { border:none; border-top:1px solid var(--border); margin-bottom:1.25rem; }
+    .pricing-features { list-style:none; display:flex; flex-direction:column; gap:0.6rem; }
+    .pricing-features li { font-size:0.85rem; color:var(--muted); padding-left:1.4rem; position:relative; }
+    .pricing-features li::before { content:'✓'; position:absolute; left:0; color:var(--green); font-weight:700; }
+
+    /* SUPPORT TABLE */
+    .table-wrap { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius-lg); overflow-x:auto; }
+    .support-table { width:100%; border-collapse:collapse; font-size:clamp(0.8rem,2vw,0.9rem); min-width:400px; }
+    .support-table th { background:var(--surface2); padding:0.85rem 1.25rem; text-align:left; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--muted); border-bottom:1px solid var(--border2); white-space:nowrap; }
+    .support-table td { padding:0.9rem 1.25rem; border-bottom:1px solid var(--border); color:var(--muted); }
+    .support-table td:first-child { color:var(--text); font-weight:500; white-space:nowrap; }
+    .support-table tr:last-child td { border-bottom:none; }
+
+    /* CONTACT */
+    .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr)); gap:1rem; margin-top:2rem; }
+    .contact-card { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius); padding:1.25rem 1.5rem; transition:border-color 0.2s; }
+    .contact-card:hover { border-color:var(--muted2); }
+    .contact-card .clabel { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--muted2); margin-bottom:0.4rem; }
+    .contact-card .cvalue { font-size:0.9rem; word-break:break-word; }
+
+    /* ABOUT */
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; }
+    .about-grid p { font-size:0.95rem; color:var(--muted); line-height:1.75; }
+
+    /* FOOTER */
+    footer { border-top:1px solid var(--border); padding:1.75rem clamp(1rem,4vw,2.5rem); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+    footer p { font-size:0.82rem; color:var(--muted2); }
+    .footer-links { display:flex; gap:1.5rem; flex-wrap:wrap; }
+    .footer-links a { font-size:0.82rem; color:var(--muted2); }
+    .footer-links a:hover { color:var(--muted); text-decoration:none; }
+
+    /* RESPONSIVE */
+    @media (max-width:768px) {
+      .nav-links { display:none; }
+      .nav-hamburger { display:flex; }
+      .products-grid { grid-template-columns:1fr; }
+      .about-grid { grid-template-columns:1fr; gap:1.5rem; }
+      .pricing-grid { grid-template-columns:1fr; }
+      .terminal-body p { white-space:normal; }
+      .flow { gap:0.25rem; }
+      .flow-arrow { display:none; }
+      footer { flex-direction:column; align-items:flex-start; }
+      .slack-fields { grid-template-columns:1fr; }
     }
-    .feature-card { background: var(--surface); padding: clamp(1.25rem, 3vw, 1.75rem); transition: background 0.2s; }
-    .feature-card:hover { background: var(--surface2); }
-    .feature-icon {
-      width: 40px; height: 40px; background: var(--teal-dim);
-      border: 1px solid rgba(45,212,191,0.15); border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; margin-bottom: 1rem;
+    @media (max-width:480px) {
+      .hero-cta { flex-direction:column; align-items:stretch; }
+      .hero-cta .btn { text-align:center; }
+      .security-banner { flex-direction:column; gap:0.5rem; }
+      .contact-grid { grid-template-columns:1fr; }
     }
-    .feature-card h3 { font-size: 0.975rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .feature-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-
-    /* ── TERMINAL ── */
-    .terminal {
-      background: #060c18; border: 1px solid var(--border2);
-      border-radius: var(--radius-lg); overflow: hidden; margin-top: 2rem;
-    }
-    .terminal-bar {
-      background: var(--surface); border-bottom: 1px solid var(--border);
-      padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.4rem;
-    }
-    .terminal-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .terminal-dot:nth-child(1) { background: #ff5f57; }
-    .terminal-dot:nth-child(2) { background: #febc2e; }
-    .terminal-dot:nth-child(3) { background: #28c840; }
-    .terminal-title {
-      margin-left: auto; margin-right: auto;
-      font-size: 0.72rem; color: var(--muted2);
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .terminal-body { padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 3vw, 1.75rem); overflow-x: auto; }
-    .terminal-body p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.72rem, 1.5vw, 0.82rem); line-height: 2;
-      color: var(--muted); white-space: nowrap;
-    }
-    .terminal-body p::before { content: '$ '; color: var(--teal); font-weight: 500; }
-    .terminal-body p em { font-style: normal; color: #e8eef8; }
-
-    /* ── SECURITY BANNER ── */
-    .security-banner {
-      margin-top: 1.5rem; background: var(--surface);
-      border: 1px solid var(--border2); border-left: 3px solid var(--teal);
-      border-radius: var(--radius); padding: 1.25rem 1.5rem;
-      display: flex; gap: 1rem; align-items: flex-start;
-    }
-    .security-banner .icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
-    .security-banner p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
-    .security-banner p strong { color: var(--text); }
-
-    /* ── DIVIDER ── */
-    .divider { border: none; border-top: 1px solid var(--border); }
-
-    /* ── PRICING ── */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-      gap: 1.25rem;
-    }
-    .pricing-card {
-      background: var(--surface); border: 1px solid var(--border2);
-      border-radius: var(--radius-lg); padding: clamp(1.5rem, 3vw, 2rem);
-      display: flex; flex-direction: column; transition: border-color 0.2s;
-    }
-    .pricing-card:hover { border-color: var(--muted2); }
-    .pricing-card.featured {
-      border-color: var(--amber);
-      background: linear-gradient(160deg, var(--surface2) 0%, var(--surface) 100%);
-    }
-    .pricing-badge {
-      display: inline-block; background: var(--amber-dim);
-      border: 1px solid var(--amber-bdr); color: var(--amber);
-      font-size: 0.7rem; font-weight: 700; padding: 2px 10px;
-      border-radius: 20px; text-transform: uppercase; letter-spacing: 0.07em;
-      margin-bottom: 1rem; align-self: flex-start;
-    }
-    .pricing-tier { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); margin-bottom: 0.5rem; }
-    .pricing-price { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.2rem; }
-    .pricing-price span { font-size: 0.9rem; font-weight: 400; color: var(--muted); }
-    .pricing-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; }
-    .pricing-divider { border: none; border-top: 1px solid var(--border); margin-bottom: 1.25rem; }
-    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .pricing-features li { font-size: 0.85rem; color: var(--muted); padding-left: 1.4rem; position: relative; }
-    .pricing-features li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
-
-    /* ── SUPPORT TABLE ── */
-    .table-wrap { background: var(--surface); border: 1px solid var(--border2); border-radius: var(--radius-lg); overflow-x: auto; }
-    .support-table { width: 100%; border-collapse: collapse; font-size: clamp(0.8rem, 2vw, 0.9rem); min-width: 400px; }
-    .support-table th {
-      background: var(--surface2); padding: 0.85rem 1.25rem; text-align: left;
-      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.07em; color: var(--muted); border-bottom: 1px solid var(--border2);
-      white-space: nowrap;
-    }
-    .support-table td { padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border); color: var(--muted); }
-    .support-table td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
-    .support-table tr:last-child td { border-bottom: none; }
-
-    /* ── CONTACT GRID ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-      gap: 1rem; margin-top: 2rem;
-    }
-    .contact-card {
-      background: var(--surface); border: 1px solid var(--border2);
-      border-radius: var(--radius); padding: 1.25rem 1.5rem; transition: border-color 0.2s;
-    }
-    .contact-card:hover { border-color: var(--muted2); }
-    .contact-card .clabel { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted2); margin-bottom: 0.4rem; }
-    .contact-card .cvalue { font-size: 0.9rem; word-break: break-word; }
-
-    /* ── ABOUT ── */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-    .about-grid p { font-size: 0.95rem; color: var(--muted); line-height: 1.75; }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 1.75rem clamp(1rem, 4vw, 2.5rem);
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    footer p { font-size: 0.82rem; color: var(--muted2); }
-    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-    .footer-links a { font-size: 0.82rem; color: var(--muted2); }
-    .footer-links a:hover { color: var(--muted); text-decoration: none; }
-
-    /* ── RESPONSIVE BREAKPOINTS ── */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-
-      .hero h1 br { display: none; }
-
-      .feature-grid { grid-template-columns: 1fr; }
-
-      .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-
-      .pricing-grid { grid-template-columns: 1fr; }
-
-      .terminal-body p { white-space: normal; }
-
-      footer { flex-direction: column; align-items: flex-start; }
-      .footer-links { gap: 1rem; }
-    }
-
-    @media (max-width: 480px) {
-      .hero-cta { flex-direction: column; align-items: stretch; }
-      .hero-cta .btn { text-align: center; }
-
-      .security-banner { flex-direction: column; gap: 0.5rem; }
-
-      .contact-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .feature-grid { grid-template-columns: repeat(2, 1fr); }
-      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-      .pricing-grid .pricing-card:last-child { grid-column: span 2; max-width: 400px; margin: 0 auto; width: 100%; }
+    @media (min-width:769px) and (max-width:1024px) {
+      .feature-grid { grid-template-columns:repeat(2,1fr); }
+      .pricing-grid { grid-template-columns:repeat(2,1fr); }
+      .pricing-grid .pricing-card:last-child { grid-column:span 2; max-width:400px; margin:0 auto; width:100%; }
     }
   </style>
 </head>
@@ -375,11 +235,11 @@
     <span class="nav-logo-text">Kube<span>Ops</span>AI</span>
   </div>
   <div class="nav-links">
-    <a href="#product">Product</a>
+    <a href="#mcp">MCP Server</a>
+    <a href="#agent">Promtops Agent</a>
     <a href="#pricing">Pricing</a>
     <a href="#support">Support</a>
     <a href="#about">About</a>
-    <a href="#contact">Contact</a>
     <a class="nav-cta" href="https://aws.amazon.com/marketplace" target="_blank">AWS Marketplace</a>
   </div>
   <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
@@ -389,38 +249,87 @@
 
 <!-- MOBILE DRAWER -->
 <div class="nav-drawer" id="drawer">
-  <a href="#product" onclick="closeDrawer()">Product</a>
+  <a href="#mcp" onclick="closeDrawer()">MCP Server</a>
+  <a href="#agent" onclick="closeDrawer()">Promtops Agent</a>
   <a href="#pricing" onclick="closeDrawer()">Pricing</a>
   <a href="#support" onclick="closeDrawer()">Support</a>
   <a href="#about" onclick="closeDrawer()">About</a>
-  <a href="#contact" onclick="closeDrawer()">Contact</a>
   <a class="nav-cta" href="https://aws.amazon.com/marketplace" target="_blank">AWS Marketplace</a>
 </div>
 
 <!-- HERO -->
 <div class="hero-wrap">
   <div class="hero">
-    <div class="hero-badge">Available on AWS Marketplace</div>
-    <h1>Your Kubernetes cluster,<br/>answering <em>your questions</em></h1>
-    <p class="hero-sub">K8s Telemetry MCP Server connects Amazon Q, Claude, and Bedrock agents directly to your cluster's observability stack — logs, metrics, traces, and AWS infrastructure — via a single Helm install.</p>
+    <div class="hero-badge">Two products. One mission.</div>
+    <h1>Stop debugging Kubernetes.<br/>Start <em>understanding</em> it.</h1>
+    <p class="hero-sub">A free MCP server gives your AI assistant read-only access to your entire cluster. When alerts fire at 3 AM, Promtops Agent investigates and posts a root-cause analysis to Slack — before anyone opens their laptop.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank">Get it on AWS Marketplace</a>
-      <a class="btn btn-secondary" href="https://github.com/kubeopsai/k8s-telemetry-mcp" target="_blank">View Documentation</a>
+      <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank">Get Promtops Agent — $199/mo</a>
+      <a class="btn btn-secondary" href="https://github.com/kubeopsai/k8s-telemetry-mcp" target="_blank">Free MCP Server →</a>
     </div>
   </div>
 </div>
 
-<!-- PRODUCT -->
-<div class="section" id="product">
-  <div class="section-label">Product</div>
-  <h2>22 tools. One Helm install.</h2>
-  <p class="section-sub">Read-only access to every layer of your Kubernetes observability stack, structured for AI assistants.</p>
+<!-- TWO PRODUCT OVERVIEW -->
+<div class="products-wrap">
+  <div class="products-grid">
+
+    <!-- Product 1: Free MCP Server -->
+    <div class="product-card free">
+      <div class="product-card-header">
+        <div class="product-tag tag-free">Free · Open Source</div>
+        <h3>K8s Telemetry MCP Server</h3>
+        <p class="product-desc">Give Amazon Q, Claude, Kiro, or Cursor read-only access to your cluster's full observability stack. Ask questions in plain English during business hours.</p>
+      </div>
+      <div class="product-card-body">
+        <div class="product-price">$0<span> forever</span></div>
+        <ul class="product-features">
+          <li>22 tools — logs, metrics, traces, K8s API, AWS</li>
+          <li>Works with Amazon Q, Claude, Kiro, Cursor</li>
+          <li>Single Helm install</li>
+          <li>Apache 2.0 — no license gating</li>
+          <li>PII &amp; secrets auto-redacted</li>
+        </ul>
+        <a class="btn btn-secondary" href="https://github.com/kubeopsai/k8s-telemetry-mcp" target="_blank">View on GitHub →</a>
+      </div>
+    </div>
+
+    <!-- Product 2: Promtops Agent -->
+    <div class="product-card paid">
+      <div class="product-card-header">
+        <div class="product-tag tag-paid">Paid · AWS Marketplace</div>
+        <h3>Promtops Agent</h3>
+        <p class="product-desc">Hooks into Alertmanager. When an alert fires, the agent runs the full diagnostic engine and posts a complete RCA to Slack — automatically, at any hour.</p>
+      </div>
+      <div class="product-card-body">
+        <div class="product-price">$199<span>/month per cluster</span></div>
+        <ul class="product-features">
+          <li>Alertmanager → Slack in under 60 seconds</li>
+          <li>BYOK — Bedrock, Anthropic, or OpenAI</li>
+          <li>Deduplication — alert storms = one thread</li>
+          <li>Runs inside your VPC — zero data egress</li>
+          <li>AWS Marketplace billing — use existing AWS spend</li>
+        </ul>
+        <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank">Subscribe on AWS Marketplace</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- MCP SERVER SECTION -->
+<div class="section" id="mcp">
+  <div class="section-label">Free MCP Server</div>
+  <h2>Your AI assistant, inside your cluster</h2>
+  <p class="section-sub">One Helm install. Point Amazon Q, Claude, Kiro, or Cursor at it. Ask anything about your cluster in plain English.</p>
 
   <div class="feature-grid">
     <div class="feature-card">
       <div class="feature-icon">📋</div>
       <h3>Logs</h3>
-      <p>Query and analyze pod logs via Loki. Pattern detection, error categorization, and actionable recommendations built in.</p>
+      <p>Query and analyze pod logs via Loki, Datadog, or CloudWatch. Pattern detection, error categorization, and recommendations built in.</p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">📈</div>
@@ -451,9 +360,7 @@
 
   <div class="terminal">
     <div class="terminal-bar">
-      <div class="terminal-dot"></div>
-      <div class="terminal-dot"></div>
-      <div class="terminal-dot"></div>
+      <div class="terminal-dot"></div><div class="terminal-dot"></div><div class="terminal-dot"></div>
       <span class="terminal-title">Ask your AI assistant</span>
     </div>
     <div class="terminal-body">
@@ -462,13 +369,90 @@
       <p><em>"Which namespace is consuming the most resources?"</em></p>
       <p><em>"Who deleted the payment-service deployment?"</em></p>
       <p><em>"Which ECR images have critical vulnerabilities?"</em></p>
-      <p><em>"Why is my pod pending? Show me the Kubernetes events."</em></p>
+      <p><em>"What deployments went out in the last 30 minutes?"</em></p>
     </div>
   </div>
 
   <div class="security-banner">
     <div class="icon">🔒</div>
-    <p><strong>Security first.</strong> All 22 tools are strictly read-only. All data is automatically sanitized — PII, secrets, tokens, and credentials are redacted before reaching your AI assistant. Communicates over stdio via <code>kubectl exec</code> — no ingress, no exposed ports, no new attack surface.</p>
+    <p><strong>Security first.</strong> All 22 tools are strictly read-only. PII, secrets, tokens, and credentials are redacted before reaching your AI assistant. Communicates over stdio via <code>kubectl exec</code> — no ingress, no exposed ports, no new attack surface.</p>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- PROMTOPS AGENT SECTION -->
+<div class="section" id="agent">
+  <div class="section-label">Promtops Agent — $199/mo</div>
+  <h2>3 AM alert. RCA in Slack. Nobody woken up.</h2>
+  <p class="section-sub">Alertmanager fires a webhook. The agent runs the full diagnostic engine across logs, metrics, events, and deployments. A complete root-cause analysis lands in Slack before your on-call engineer opens their laptop.</p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-icon">🚨</div>
+      <div class="flow-label">Alertmanager</div>
+      <div class="flow-sub">fires webhook</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-icon">⚡</div>
+      <div class="flow-label">200 OK</div>
+      <div class="flow-sub">instant response</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-icon">🤖</div>
+      <div class="flow-label">LLM Triage</div>
+      <div class="flow-sub">Bedrock / Anthropic / OpenAI</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-icon">🔧</div>
+      <div class="flow-label">22 Tools</div>
+      <div class="flow-sub">logs, metrics, events</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-icon">💬</div>
+      <div class="flow-label">Slack RCA</div>
+      <div class="flow-sub">root cause + actions</div>
+    </div>
+  </div>
+
+  <!-- Slack mock -->
+  <div class="slack-mock">
+    <div class="slack-header">
+      <div class="slack-header-dot" style="background:#ff5f57"></div>
+      <div class="slack-header-dot" style="background:#febc2e"></div>
+      <div class="slack-header-dot" style="background:#28c840"></div>
+      <span class="slack-channel"># incidents</span>
+    </div>
+    <div class="slack-body">
+      <div class="slack-msg-header">
+        <div class="slack-avatar">🤖</div>
+        <span class="slack-sender">Promtops</span>
+        <span class="slack-app-badge">APP</span>
+        <span class="slack-time">3:14 AM</span>
+      </div>
+      <div class="slack-block-header">
+        <div class="alert-title">🔴 PodOOMKilled — payments / checkout-api</div>
+        <div class="slack-fields">
+          <div class="slack-field"><div class="slack-field-label">Severity</div><div class="slack-field-value">CRITICAL</div></div>
+          <div class="slack-field"><div class="slack-field-label">Namespace</div><div class="slack-field-value">payments</div></div>
+          <div class="slack-field"><div class="slack-field-label">Service</div><div class="slack-field-value">checkout-api</div></div>
+          <div class="slack-field"><div class="slack-field-label">Status</div><div class="slack-field-value">FIRING</div></div>
+        </div>
+      </div>
+      <div class="slack-section"><strong>Root Cause</strong><br/>checkout-api was OOMKilled due to an unbounded in-memory cache introduced in <strong>v2.4.1</strong>, deployed 14 minutes before the alert fired. Memory spiked from 180Mi to 512Mi limit.</div>
+      <div class="slack-section"><strong>Evidence</strong><br/>• K8s event: OOMKilled × 3 in 10 min (03:04–03:14 UTC)<br/>• Memory: 180Mi → 512Mi limit hit after deploy v2.4.1<br/>• Recent deploy: checkout-api v2.4.1 at 03:00:11 UTC<br/>• Log pattern: "cache.put() called 12,000×/min" (new in v2.4.1)</div>
+      <div class="slack-section"><strong>Recommended Actions</strong><br/>1. Roll back checkout-api to v2.4.0 immediately<br/>2. Add cache size limit (max 10,000 entries)<br/>3. Raise memory limit to 768Mi as short-term mitigation</div>
+      <div class="slack-footer">🤖 Automated analysis by Promtops · 8 tool calls · 47 seconds</div>
+    </div>
+  </div>
+
+  <div class="security-banner" style="margin-top:1.5rem;">
+    <div class="icon">🔑</div>
+    <p><strong>BYOK — Bring Your Own Key.</strong> The agent runs entirely inside your VPC. You provide your own Bedrock, Anthropic, or OpenAI key. Your logs, metrics, and traces never leave your cluster. We never see your data or your tokens.</p>
   </div>
 </div>
 
@@ -478,48 +462,35 @@
 <div class="section" id="pricing">
   <div class="section-label">Pricing</div>
   <h2>Simple, transparent pricing</h2>
-  <p class="section-sub">Available on AWS Marketplace. Pay with your existing AWS committed spend — charges appear on your monthly AWS invoice.</p>
+  <p class="section-sub">Both products available on AWS Marketplace. Charges appear on your monthly AWS invoice — use your existing committed spend.</p>
 
   <div class="pricing-grid">
     <div class="pricing-card">
-      <div class="pricing-tier">Standard</div>
-      <div class="pricing-price">$29<span>/month</span></div>
-      <div class="pricing-desc">Core observability for small teams</div>
+      <div class="pricing-tier">MCP Server — Free</div>
+      <div class="pricing-price">$0<span> forever</span></div>
+      <div class="pricing-desc">Manual querying via AI assistants</div>
       <hr class="pricing-divider" />
       <ul class="pricing-features">
-        <li>1 namespace</li>
-        <li>100 log lines per query</li>
-        <li>9 core tools</li>
-        <li>Logs, metrics &amp; traces</li>
-        <li>Kubernetes events</li>
+        <li>22 tools, fully unlocked</li>
+        <li>Amazon Q, Claude, Kiro, Cursor</li>
+        <li>Loki, Prometheus, Tempo, K8s API, AWS</li>
+        <li>Apache 2.0 open source</li>
+        <li>Community support via GitHub</li>
       </ul>
     </div>
     <div class="pricing-card featured">
-      <div class="pricing-badge">Most Popular</div>
-      <div class="pricing-tier">Professional</div>
-      <div class="pricing-price">$99<span>/month</span></div>
-      <div class="pricing-desc">Full observability for production teams</div>
+      <div class="pricing-badge">Promtops Agent</div>
+      <div class="pricing-tier">Automated Incident Response</div>
+      <div class="pricing-price">$199<span>/month per cluster</span></div>
+      <div class="pricing-desc">Autonomous 3 AM incident responder</div>
       <hr class="pricing-divider" />
       <ul class="pricing-features">
-        <li>Unlimited namespaces</li>
-        <li>500 log lines per query</li>
-        <li>20 tools</li>
-        <li>Everything in Standard</li>
-        <li>Analytics, AWS, HPA &amp; Alertmanager tools</li>
-      </ul>
-    </div>
-    <div class="pricing-card">
-      <div class="pricing-tier">Enterprise</div>
-      <div class="pricing-price">$299<span>/month</span></div>
-      <div class="pricing-desc">Maximum capability with SLA support</div>
-      <hr class="pricing-divider" />
-      <ul class="pricing-features">
-        <li>Unlimited namespaces</li>
-        <li>5,000 log lines per query</li>
-        <li>All 22 tools</li>
-        <li>72-hour query range</li>
-        <li>AWS Config compliance tools</li>
-        <li>1 business day SLA</li>
+        <li>Alertmanager → Slack RCA in &lt;60 seconds</li>
+        <li>BYOK — Bedrock, Anthropic, or OpenAI</li>
+        <li>Alert deduplication — one thread per incident</li>
+        <li>Runs inside your VPC — zero data egress</li>
+        <li>AWS Marketplace licensed &amp; metered</li>
+        <li>Email support — 2 business day response</li>
       </ul>
     </div>
   </div>
@@ -531,32 +502,27 @@
 <div class="section" id="support">
   <div class="section-label">Support</div>
   <h2>We're here when you need us</h2>
-  <p class="section-sub">Business hours: Monday–Friday, 09:00–18:00 CET. All support requests handled via email and GitHub Issues.</p>
+  <p class="section-sub">Business hours: Monday–Friday, 09:00–18:00 CET. All support via email and GitHub Issues.</p>
 
   <div class="table-wrap">
     <table class="support-table">
       <thead>
         <tr>
-          <th>Tier</th>
+          <th>Product</th>
           <th>First Response</th>
-          <th>Target Resolution</th>
+          <th>Channel</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Standard ($29/mo)</td>
-          <td>5 business days</td>
+          <td>MCP Server (Free)</td>
           <td>Best effort</td>
+          <td>GitHub Issues</td>
         </tr>
         <tr>
-          <td>Professional ($99/mo)</td>
+          <td>Promtops Agent ($199/mo)</td>
           <td>2 business days</td>
-          <td>5 business days</td>
-        </tr>
-        <tr>
-          <td>Enterprise ($299/mo)</td>
-          <td>1 business day</td>
-          <td>3 business days</td>
+          <td>Email + GitHub Issues</td>
         </tr>
       </tbody>
     </table>
@@ -568,7 +534,7 @@
       <div class="cvalue"><a href="mailto:support@kubeopsai.net">support@kubeopsai.net</a></div>
     </div>
     <div class="contact-card">
-      <div class="clabel">Bug Reports &amp; Feature Requests</div>
+      <div class="clabel">MCP Server Issues</div>
       <div class="cvalue"><a href="https://github.com/kubeopsai/k8s-telemetry-mcp/issues" target="_blank">GitHub Issues</a></div>
     </div>
     <div class="contact-card">
@@ -584,10 +550,10 @@
 <div class="section" id="about">
   <div class="section-label">About</div>
   <h2>About KubeOpsAI</h2>
-  <p class="section-sub">We build Kubernetes observability tooling for AI assistants.</p>
+  <p class="section-sub">We build Kubernetes observability tooling for AI assistants and autonomous incident response.</p>
   <div class="about-grid">
     <p>Engineering teams spend too much time switching between dashboards, running manual queries, and piecing together context during incidents. We built K8s Telemetry MCP Server to eliminate that friction — letting your AI assistant do the querying while you focus on fixing the problem.</p>
-    <p>Our product implements the Model Context Protocol (MCP), an open standard that allows AI assistants like Amazon Q, Claude, and Bedrock agents to call external tools and retrieve structured data. Every tool is read-only and every response is sanitized before it reaches your AI.</p>
+    <p>Promtops Agent takes it further: when nobody is at a keyboard, the agent runs the full diagnostic engine automatically and delivers a complete root-cause analysis to Slack. One prevented 3 AM page pays for months of subscription.</p>
   </div>
 </div>
 
@@ -597,7 +563,7 @@
 <div class="section" id="contact">
   <div class="section-label">Contact</div>
   <h2>Get in touch</h2>
-  <p class="section-sub">Sales inquiries, support, or general questions — we respond promptly.</p>
+  <p class="section-sub">Sales inquiries, support, or general questions.</p>
   <div class="contact-grid">
     <div class="contact-card">
       <div class="clabel">General Inquiries</div>
