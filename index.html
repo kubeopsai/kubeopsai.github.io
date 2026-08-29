@@ -216,6 +216,23 @@
     .security-banner p { font-size:0.875rem; color:var(--muted); line-height:1.65; }
     .security-banner p strong { color:var(--text); }
 
+    /* SECURITY HERO SECTION */
+    .security-hero { background:linear-gradient(135deg,rgba(45,212,191,0.06) 0%,rgba(45,212,191,0.02) 100%); border-top:1px solid rgba(45,212,191,0.2); border-bottom:1px solid rgba(45,212,191,0.2); padding:clamp(48px,8vw,80px) clamp(1rem,4vw,2.5rem); }
+    .security-hero-inner { max-width:960px; margin:0 auto; }
+    .security-hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(45,212,191,0.1); border:1px solid rgba(45,212,191,0.3); color:var(--teal); font-size:0.72rem; font-weight:700; padding:5px 14px; border-radius:20px; margin-bottom:1.5rem; letter-spacing:0.06em; text-transform:uppercase; }
+    .security-hero h2 { font-size:clamp(1.5rem,3.5vw,2.2rem); font-weight:800; letter-spacing:-0.03em; margin-bottom:1rem; }
+    .security-hero h2 em { font-style:normal; color:var(--teal); }
+    .security-hero-sub { font-size:clamp(0.95rem,2vw,1.05rem); color:var(--muted); max-width:640px; line-height:1.7; margin-bottom:2.5rem; }
+    .security-pillars { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:1rem; }
+    .security-pillar { background:var(--surface); border:1px solid rgba(45,212,191,0.15); border-radius:var(--radius); padding:1.25rem 1.5rem; }
+    .security-pillar-icon { font-size:1.4rem; margin-bottom:0.75rem; }
+    .security-pillar h3 { font-size:0.9rem; font-weight:700; color:var(--text); margin-bottom:0.4rem; }
+    .security-pillar p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+    .security-quote { margin-top:2rem; background:rgba(45,212,191,0.05); border:1px solid rgba(45,212,191,0.2); border-radius:var(--radius-lg); padding:1.75rem 2rem; }
+    .security-quote p { font-size:1.05rem; color:var(--text); line-height:1.7; font-weight:500; }
+    .security-quote p em { font-style:normal; color:var(--teal); }
+    .security-quote-sub { margin-top:0.75rem; font-size:0.85rem; color:var(--muted); }
+
     /* DIVIDER */
     .divider { border:none; border-top:1px solid var(--border); }
 
@@ -300,6 +317,7 @@
     <a href="#story">How It Works</a>
     <a href="#mcp">MCP Server</a>
     <a href="#agent">Promtops Agent</a>
+    <a href="#security">Security</a>
     <a href="#pricing">Pricing</a>
     <a href="#support">Support</a>
     <a href="#about">About</a>
@@ -315,6 +333,7 @@
   <a href="#story" onclick="closeDrawer()">How It Works</a>
   <a href="#mcp" onclick="closeDrawer()">MCP Server</a>
   <a href="#agent" onclick="closeDrawer()">Promtops Agent</a>
+  <a href="#security" onclick="closeDrawer()">Security</a>
   <a href="#pricing" onclick="closeDrawer()">Pricing</a>
   <a href="#support" onclick="closeDrawer()">Support</a>
   <a href="#about" onclick="closeDrawer()">About</a>
@@ -398,11 +417,11 @@
         <div class="story-card-num pain">1</div>
         <div class="story-card-meta">
           <div class="story-card-time">Saturday · 3:15 AM</div>
-          <div class="story-card-title">The pager goes off. The grind begins.</div>
+          <div class="story-card-title">The pager goes off. The scramble begins.</div>
         </div>
       </div>
       <div class="story-card-body">
-        <p>PagerDuty fires. <strong>High Latency — Payment Gateway.</strong> You roll out of bed, find your laptop, and start the ritual you've done a hundred times before.</p>
+        <p>PagerDuty fires. <strong>High Latency — Payment Gateway.</strong> You roll out of bed, grab your laptop, and start the ritual you've done a hundred times before.</p>
         <div class="story-steps">
           <div class="story-step normal"><span class="step-ts">3:15</span><span>Laptop open. VPN connecting. Okta MFA.</span></div>
           <div class="story-step normal"><span class="step-ts">3:19</span><span>AWS Console. Log into Grafana. Find the right dashboard.</span></div>
@@ -410,7 +429,7 @@
           <div class="story-step normal"><span class="step-ts">3:31</span><span>Pulling K8s events. Checking recent deployments. Still no clear answer.</span></div>
           <div class="story-step highlight"><span class="step-ts">3:40</span><span>Found it — a database migration from yesterday locked a table. That's the latency spike.</span></div>
           <div class="story-step normal"><span class="step-ts">3:43</span><span>Roll back the deployment. Wait for pods to stabilize.</span></div>
-          <div class="story-step normal"><span class="step-ts">4:30</span><span>Incident closed. You close the laptop. Sleep is gone.</span></div>
+          <div class="story-step normal"><span class="step-ts">4:30</span><span>Incident closed. Laptop shut. Sleep is gone.</span></div>
         </div>
         <div class="story-callout callout-pain">
           <span class="callout-icon">⏱️</span>
@@ -654,6 +673,53 @@
 
 <hr class="divider" />
 
+<!-- SECURITY SECTION -->
+<div class="security-hero" id="security">
+  <div class="security-hero-inner">
+    <div class="security-hero-badge">🔒 Security &amp; Privacy</div>
+    <h2>Your data <em>never leaves your VPC.</em><br/>That's not a feature. It's the architecture.</h2>
+    <p class="security-hero-sub">Every other incident response tool sends your logs, metrics, and traces to their SaaS platform. KubeOpsAI runs entirely inside your cluster. Your data stays in your infrastructure — always.</p>
+    <div class="security-pillars">
+      <div class="security-pillar">
+        <div class="security-pillar-icon">🏠</div>
+        <h3>Runs in your cluster</h3>
+        <p>The agent is a pod inside your EKS cluster. It queries your observability stack directly over the cluster network. Nothing leaves your VPC.</p>
+      </div>
+      <div class="security-pillar">
+        <div class="security-pillar-icon">👁️</div>
+        <h3>Read-only by design</h3>
+        <p>All tools are strictly read-only. No write, delete, or mutation operations exist in the codebase. The agent investigates — it cannot change anything.</p>
+      </div>
+      <div class="security-pillar">
+        <div class="security-pillar-icon">🔑</div>
+        <h3>Bring your own LLM key</h3>
+        <p>You provide your own Bedrock, Anthropic, or OpenAI key. We never see your API keys, your logs, your metrics, or your traces.</p>
+      </div>
+      <div class="security-pillar">
+        <div class="security-pillar-icon">🧹</div>
+        <h3>PII auto-redacted</h3>
+        <p>Secrets, tokens, AWS keys, JWTs, and database connection strings are scrubbed before any data reaches the LLM.</p>
+      </div>
+      <div class="security-pillar">
+        <div class="security-pillar-icon">🌐</div>
+        <h3>No ingress required</h3>
+        <p>No load balancers, no exposed ports, no public endpoints. The MCP server communicates over stdio via <code>kubectl exec</code>.</p>
+      </div>
+      <div class="security-pillar">
+        <div class="security-pillar-icon">📋</div>
+        <h3>Scoped RBAC</h3>
+        <p>A minimal ClusterRole grants read-only access to events, nodes, deployments, HPAs, and replicasets — nothing more.</p>
+      </div>
+    </div>
+    <div class="security-quote">
+      <p>"<em>Read-only by design. The agent investigates and explains. Your engineer makes the call and runs the fix.</em> This is exactly why security teams approve it in 5 minutes instead of 6 months."</p>
+      <div class="security-quote-sub">The reason enterprise security teams say yes on the first review.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
 <!-- PRICING -->
 <div class="section" id="pricing">
   <div class="section-label">Pricing</div>
@@ -664,7 +730,7 @@
     <div class="pricing-card">
       <div class="pricing-tier">MCP Server — Free</div>
       <div class="pricing-price">$0<span> forever</span></div>
-      <div class="pricing-desc">Manual querying via AI assistants</div>
+      <div class="pricing-desc">Manual querying via AI assistants during business hours</div>
       <hr class="pricing-divider" />
       <ul class="pricing-features">
         <li>22 tools, fully unlocked</li>
@@ -675,21 +741,37 @@
       </ul>
     </div>
     <div class="pricing-card featured">
-      <div class="pricing-badge">Promtops Agent</div>
-      <div class="pricing-tier">Automated Incident Response</div>
+      <div class="pricing-badge">Most Popular</div>
+      <div class="pricing-tier">Promtops Agent — Automated</div>
       <div class="pricing-price">$199<span>/month per cluster</span></div>
-      <div class="pricing-desc">Autonomous 3 AM incident responder</div>
+      <div class="pricing-desc">Autonomous 3 AM incident responder — no human prompt needed</div>
       <hr class="pricing-divider" />
       <ul class="pricing-features">
         <li>Alertmanager → Slack RCA in &lt;60 seconds</li>
         <li>BYOK — Bedrock, Anthropic, or OpenAI</li>
         <li>Alert deduplication — one thread per incident</li>
-        <li>Runs inside your VPC — zero data egress</li>
-        <li>AWS Marketplace licensed &amp; metered</li>
+        <li><strong style="color:var(--teal)">Runs inside your VPC — zero data egress</strong></li>
+        <li><strong style="color:var(--teal)">Your data never leaves your cluster</strong></li>
+        <li>AWS Marketplace — use existing AWS spend</li>
         <li>Email support — 2 business day response</li>
       </ul>
     </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Enterprise</div>
+      <div class="pricing-price" style="font-size:1.6rem;">Custom</div>
+      <div class="pricing-desc">Multiple clusters, custom SLA, private onboarding</div>
+      <hr class="pricing-divider" />
+      <ul class="pricing-features">
+        <li>Everything in Promtops Agent</li>
+        <li>Volume pricing for multiple clusters</li>
+        <li>Custom SLA &amp; SLO guarantees</li>
+        <li>Dedicated onboarding &amp; setup call</li>
+        <li>Priority email support</li>
+        <li>Private Slack channel</li>
+      </ul>
+    </div>
   </div>
+  <p style="text-align:center;margin-top:1.5rem;font-size:0.875rem;color:var(--muted);">All paid plans billed through AWS Marketplace — charges appear on your existing AWS invoice. <a href="mailto:hello@kubeopsai.net">Contact us</a> for enterprise pricing.</p>
 </div>
 
 <hr class="divider" />
