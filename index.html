@@ -100,6 +100,50 @@
     .section h2 { font-size:clamp(1.4rem,3vw,1.75rem); font-weight:800; letter-spacing:-0.02em; margin-bottom:0.6rem; }
     .section-sub { color:var(--muted); font-size:clamp(0.9rem,2vw,1rem); margin-bottom:2.5rem; max-width:600px; }
 
+    /* STORY TIMELINE */
+    .story-timeline { display:flex; flex-direction:column; gap:0; margin-top:2rem; }
+    .story-act { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius-lg); overflow:hidden; }
+    .story-act-header { padding:1rem 1.5rem; display:flex; align-items:center; gap:1rem; }
+    .story-act-header.free { background:rgba(45,212,191,0.08); border-bottom:1px solid rgba(45,212,191,0.15); }
+    .story-act-header.pain { background:rgba(248,113,113,0.08); border-bottom:1px solid rgba(248,113,113,0.15); }
+    .story-act-header.convert { background:rgba(245,158,11,0.08); border-bottom:1px solid rgba(245,158,11,0.2); }
+    .story-act-time { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--muted); font-family:'JetBrains Mono',monospace; }
+    .story-act-title { font-size:1rem; font-weight:800; letter-spacing:-0.01em; }
+    .story-act-header.free .story-act-title { color:var(--teal); }
+    .story-act-header.pain .story-act-title { color:var(--red); }
+    .story-act-header.convert .story-act-title { color:var(--amber); }
+    .story-act-body { padding:1.5rem; display:flex; flex-direction:column; gap:0.9rem; }
+    .story-act-body p { font-size:0.9rem; color:var(--muted); line-height:1.7; }
+    .story-prompt { background:#060c18; border:1px solid var(--border2); border-radius:var(--radius); padding:0.75rem 1rem; font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:var(--teal); }
+    .story-reply { background:var(--surface2); border:1px solid var(--border2); border-radius:var(--radius); padding:0.85rem 1rem; font-size:0.875rem; color:var(--muted); line-height:1.65; display:flex; gap:0.75rem; align-items:flex-start; }
+    .story-reply-icon { font-size:1.1rem; flex-shrink:0; margin-top:1px; }
+    .story-manual-steps { display:flex; flex-direction:column; gap:0; border:1px solid var(--border2); border-radius:var(--radius); overflow:hidden; }
+    .story-step { display:flex; gap:1rem; align-items:center; padding:0.6rem 1rem; font-size:0.82rem; border-bottom:1px solid var(--border); }
+    .story-step:last-child { border-bottom:none; }
+    .story-step.done { color:var(--muted); }
+    .story-step.found { color:var(--text); background:rgba(248,113,113,0.06); }
+    .step-time { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--muted2); flex-shrink:0; width:2.5rem; }
+    .story-outcome { font-size:0.875rem; padding:0.85rem 1rem; border-radius:var(--radius); display:flex; gap:0.6rem; align-items:flex-start; line-height:1.65; }
+    .story-outcome span:first-child { flex-shrink:0; font-weight:700; }
+    .free-outcome { background:rgba(45,212,191,0.07); border:1px solid rgba(45,212,191,0.15); color:var(--muted); }
+    .free-outcome span:first-child { color:var(--teal); }
+    .pain-outcome { background:rgba(248,113,113,0.07); border:1px solid rgba(248,113,113,0.15); color:var(--muted); }
+    .pain-outcome span:first-child { color:var(--red); }
+    .convert-outcome { background:var(--amber-dim); border:1px solid var(--amber-bdr); color:var(--muted); }
+    .convert-outcome span:first-child { color:var(--amber); }
+    .story-connector { display:flex; flex-direction:column; align-items:center; padding:0.25rem 0; }
+    .story-connector-line { width:2px; height:16px; background:var(--border2); }
+    .story-connector-dot { width:8px; height:8px; border-radius:50%; background:var(--border2); }
+    .story-insight { border:1px solid var(--border2); border-radius:var(--radius); overflow:hidden; margin-top:0.25rem; }
+    .story-insight-row { display:flex; justify-content:space-between; align-items:center; padding:0.65rem 1rem; border-bottom:1px solid var(--border); font-size:0.85rem; gap:1rem; }
+    .story-insight-row:last-child { border-bottom:none; }
+    .insight-label { color:var(--muted); flex-shrink:0; }
+    .insight-value { color:var(--text); font-weight:500; text-align:right; }
+    .story-readonly-note { margin-top:2rem; background:var(--surface); border:1px solid var(--border2); border-left:3px solid var(--amber); border-radius:var(--radius); padding:1.25rem 1.5rem; display:flex; gap:1rem; align-items:flex-start; }
+    .story-readonly-icon { font-size:1.2rem; flex-shrink:0; margin-top:1px; }
+    .story-readonly-note strong { color:var(--text); display:block; margin-bottom:0.3rem; }
+    .story-readonly-note span { font-size:0.875rem; color:var(--muted); line-height:1.65; }
+
     /* FLOW DIAGRAM */
     .flow { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:0; margin:2rem 0; }
     .flow-step { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius); padding:0.85rem 1.25rem; text-align:center; min-width:120px; }
@@ -235,6 +279,7 @@
     <span class="nav-logo-text">Kube<span>Ops</span>AI</span>
   </div>
   <div class="nav-links">
+    <a href="#story">How It Works</a>
     <a href="#mcp">MCP Server</a>
     <a href="#agent">Promtops Agent</a>
     <a href="#pricing">Pricing</a>
@@ -249,6 +294,7 @@
 
 <!-- MOBILE DRAWER -->
 <div class="nav-drawer" id="drawer">
+  <a href="#story" onclick="closeDrawer()">How It Works</a>
   <a href="#mcp" onclick="closeDrawer()">MCP Server</a>
   <a href="#agent" onclick="closeDrawer()">Promtops Agent</a>
   <a href="#pricing" onclick="closeDrawer()">Pricing</a>
@@ -316,6 +362,101 @@
 
   </div>
   <p style="text-align:center;margin-top:1.25rem;font-size:0.875rem;color:var(--muted);">Your on-call engineer costs $150/hr. One prevented 3 AM page pays for <strong style="color:var(--text);">9 months</strong> of Promtops.</p>
+</div>
+
+<hr class="divider" />
+
+<!-- USE CASE STORY -->
+<div class="section" id="story">
+  <div class="section-label">Real-World Use Case</div>
+  <h2>From free tool to 3 AM hero</h2>
+  <p class="section-sub">How one DevOps engineer went from starring a GitHub repo on Tuesday to subscribing on Friday.</p>
+
+  <div class="story-timeline">
+
+    <div class="story-act">
+      <div class="story-act-header free">
+        <div class="story-act-time">Tuesday · 2:00 PM</div>
+        <div class="story-act-title">The Free Win</div>
+      </div>
+      <div class="story-act-body">
+        <p>A DevOps lead at a fintech startup is chasing a staging issue. They type into Claude Desktop:</p>
+        <div class="story-prompt">&ldquo;Why did the checkout pod restart 10 minutes ago?&rdquo;</div>
+        <p>Claude calls <code>get_k8s_events</code> and <code>query_pod_logs</code>. In seconds:</p>
+        <div class="story-reply">
+          <div class="story-reply-icon">🤖</div>
+          <div>The pod was <strong>OOMKilled</strong>. It hit its 512Mi memory limit immediately after processing a large JSON payload. The spike is visible in the last 3 log lines before termination.</div>
+        </div>
+        <div class="story-outcome free-outcome">
+          <span>✓</span> Fixed in <strong>3 minutes</strong> instead of 20. They star the GitHub repo and message their team: <em>"This open-source MCP tool is incredible for debugging."</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-connector">
+      <div class="story-connector-line"></div>
+      <div class="story-connector-dot"></div>
+      <div class="story-connector-line"></div>
+    </div>
+
+    <div class="story-act">
+      <div class="story-act-header pain">
+        <div class="story-act-time">Saturday · 3:15 AM</div>
+        <div class="story-act-title">The Pain</div>
+      </div>
+      <div class="story-act-body">
+        <p>PagerDuty fires. <strong>High Latency — Payment Gateway.</strong> The engineer rolls out of bed.</p>
+        <div class="story-manual-steps">
+          <div class="story-step done"><span class="step-time">3:15</span><span>Roll out of bed. Find laptop.</span></div>
+          <div class="story-step done"><span class="step-time">3:18</span><span>Connect to corporate VPN. Okta MFA.</span></div>
+          <div class="story-step done"><span class="step-time">3:21</span><span>Open AWS Console. Log into Grafana.</span></div>
+          <div class="story-step done"><span class="step-time">3:25</span><span>Start querying Prometheus. Check Loki logs.</span></div>
+          <div class="story-step done"><span class="step-time">3:35</span><span>Cross-reference K8s events with deployment history.</span></div>
+          <div class="story-step found"><span class="step-time">3:40</span><span>Found it: bad DB migration locked a table. Latency spike confirmed.</span></div>
+          <div class="story-step done"><span class="step-time">3:42</span><span>Roll back deployment. Wait for pods to stabilize.</span></div>
+          <div class="story-step done"><span class="step-time">4:30</span><span>Incident closed. Sleep is gone.</span></div>
+        </div>
+        <div class="story-outcome pain-outcome">
+          <span>✗</span> <strong>25 minutes of manual triage.</strong> The free MCP tool had all the access it needed to find this — it just needed someone at a keyboard to ask.
+        </div>
+      </div>
+    </div>
+
+    <div class="story-connector">
+      <div class="story-connector-line"></div>
+      <div class="story-connector-dot"></div>
+      <div class="story-connector-line"></div>
+    </div>
+
+    <div class="story-act">
+      <div class="story-act-header convert">
+        <div class="story-act-time">Monday · 9:00 AM</div>
+        <div class="story-act-title">The Realization</div>
+      </div>
+      <div class="story-act-body">
+        <p>In the incident review, the engineer remembers Tuesday. They open the README and scroll to the bottom. They see the banner: <em>"Automated 3 AM Incident Response."</em></p>
+        <p style="margin-top:0.75rem;">They click through to kubeopsai.net and see the mock Slack message. The exact manual work they did at 3:15 AM — correlating the latency spike to the DB lock and the recent deployment — shown happening <strong>autonomously in under 60 seconds.</strong></p>
+        <div class="story-insight">
+          <div class="story-insight-row"><span class="insight-label">What the agent does</span><span class="insight-value">Investigates, correlates, explains</span></div>
+          <div class="story-insight-row"><span class="insight-label">What the engineer does</span><span class="insight-value">Reads the RCA, runs the fix</span></div>
+          <div class="story-insight-row"><span class="insight-label">Time to root cause</span><span class="insight-value"><s style="color:var(--muted)">25 min manual</s> → <strong style="color:var(--green)">&lt;60 sec</strong></span></div>
+          <div class="story-insight-row"><span class="insight-label">Cost</span><span class="insight-value">$199/mo vs. $150/hr on-call engineer</span></div>
+        </div>
+        <div class="story-outcome convert-outcome">
+          <span>→</span> They click <strong>Subscribe on AWS Marketplace.</strong> $199 is cheaper than one ruined night's sleep — and the company already has AWS spend to use.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="story-readonly-note">
+    <div class="story-readonly-icon">🔒</div>
+    <div>
+      <strong>Read-only by design — and that's the point.</strong><br/>
+      <span>The agent investigates and explains. Your engineer makes the call and runs the fix. This is why security teams approve it in 5 minutes. An auto-remediation bot that mutates production at 3 AM would never pass a security review.</span>
+    </div>
+  </div>
 </div>
 
 <hr class="divider" />
