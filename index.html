@@ -347,7 +347,7 @@
     <h1>Stop debugging Kubernetes.<br/>Start <em>understanding</em> it.</h1>
     <p class="hero-sub">A free MCP server gives your AI assistant read-only access to your entire cluster. When alerts fire at 3 AM, Promtops Agent investigates and posts a root-cause analysis to Slack — before anyone opens their laptop.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank">Get Promtops Agent — $199/mo</a>
+      <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank">Get Promtops Agent — $199/mo per cluster</a>
       <a class="btn btn-secondary" href="https://github.com/kubeopsai/k8s-telemetry-mcp" target="_blank">Free MCP Server →</a>
     </div>
   </div>
@@ -385,7 +385,8 @@
         <p class="product-desc">Hooks into Alertmanager. When an alert fires, the agent runs the full diagnostic engine and posts a complete RCA to Slack — automatically, at any hour.</p>
       </div>
       <div class="product-card-body">
-        <div class="product-price">$199<span>/month per cluster</span></div>
+        <div class="product-price">$199<span>/month</span></div>
+        <p style="font-size:0.78rem;color:var(--amber);font-weight:600;margin-bottom:0.25rem;">1 cluster only — need more? See Enterprise.</p>
         <ul class="product-features">
           <li>Alertmanager → Slack in under 60 seconds</li>
           <li>BYOK — Bedrock, Anthropic, or OpenAI</li>
@@ -508,13 +509,13 @@
           <div class="story-compare-row"><span class="compare-label">With Promtops Agent</span><span class="compare-val" style="color:var(--green)">Paged at 3 AM → RCA already in Slack → fix → back to sleep by 3:10</span></div>
           <div class="story-compare-row"><span class="compare-label">What the agent does</span><span class="compare-val">Investigates, correlates, explains</span></div>
           <div class="story-compare-row"><span class="compare-label">What your engineer does</span><span class="compare-val">Reads the RCA, runs the fix</span></div>
-          <div class="story-compare-row"><span class="compare-label">Cost</span><span class="compare-val">$199/mo — less than 2 hours of on-call time</span></div>
+          <div class="story-compare-row"><span class="compare-label">Cost</span><span class="compare-val">$199/mo per cluster — less than 2 hours of on-call time</span></div>
         </div>
         <div class="story-callout callout-upgrade">
           <span class="callout-icon">🔒</span>
           <div><strong>Read-only by design.</strong> The agent never touches your cluster — it only reads. Your engineer still makes the call and runs the fix. That's exactly why security teams approve it without a lengthy review.</div>
         </div>
-        <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank" style="align-self:flex-start;margin-top:0.5rem;">Subscribe on AWS Marketplace — $199/mo</a>
+        <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank" style="align-self:flex-start;margin-top:0.5rem;">Subscribe on AWS Marketplace — $199/mo per cluster</a>
       </div>
     </div>
 
@@ -598,7 +599,7 @@
 
 <!-- PROMTOPS AGENT SECTION -->
 <div class="section" id="agent">
-  <div class="section-label">Promtops Agent — $199/mo</div>
+  <div class="section-label">Promtops Agent — $199/mo per cluster</div>
   <h2>3 AM alert. RCA in Slack. Nobody woken up.</h2>
   <p class="section-sub">Alertmanager fires a webhook. The agent runs the full diagnostic engine across logs, metrics, events, and deployments. A complete root-cause analysis lands in Slack before your on-call engineer opens their laptop.</p>
 
@@ -742,9 +743,9 @@
     </div>
     <div class="pricing-card featured">
       <div class="pricing-badge">Most Popular</div>
+      <div class="pricing-price">$199<span>/month</span></div>
       <div class="pricing-tier">Promtops Agent — Automated</div>
-      <div class="pricing-price">$199<span>/month per cluster</span></div>
-      <div class="pricing-desc">Autonomous 3 AM incident responder — no human prompt needed</div>
+      <div class="pricing-desc">Autonomous 3 AM incident responder — <strong style="color:var(--amber)">1 cluster</strong>. Need more clusters? See Enterprise.</div>
       <hr class="pricing-divider" />
       <ul class="pricing-features">
         <li>Alertmanager → Slack RCA in &lt;60 seconds</li>
@@ -806,7 +807,7 @@
           <td>GitHub Issues</td>
         </tr>
         <tr>
-          <td>Promtops Agent ($199/mo)</td>
+          <td>Promtops Agent ($199/mo · 1 cluster)</td>
           <td>2 business days</td>
           <td>Email + GitHub Issues</td>
         </tr>
