@@ -353,53 +353,32 @@
   </div>
 </div>
 
-<!-- TWO PRODUCT OVERVIEW -->
-<div class="products-wrap">
-  <div class="products-grid">
+<!-- PRODUCT TIER TEASER -->
+<div style="max-width:960px;margin:0 auto;padding:clamp(32px,6vw,56px) clamp(1rem,4vw,2.5rem);">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:1rem;">
 
-    <!-- Product 1: Free MCP Server -->
-    <div class="product-card free">
-      <div class="product-card-header">
-        <div class="product-tag tag-free">Free · Open Source</div>
-        <h3>K8s Telemetry MCP Server</h3>
-        <p class="product-desc">Give Amazon Q, Claude, Kiro, or Cursor read-only access to your cluster's full observability stack. Ask questions in plain English during business hours.</p>
-      </div>
-      <div class="product-card-body">
-        <div class="product-price">$0<span> forever</span></div>
-        <ul class="product-features">
-          <li>22 tools — logs, metrics, traces, K8s API, AWS</li>
-          <li>Works with Amazon Q, Claude, Kiro, Cursor</li>
-          <li>Single Helm install</li>
-          <li>Apache 2.0 — no license gating</li>
-          <li>PII &amp; secrets auto-redacted</li>
-        </ul>
-        <a class="btn btn-secondary" href="https://github.com/kubeopsai/k8s-telemetry-mcp" target="_blank">View on GitHub →</a>
-      </div>
+    <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:1.5rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--teal);">MCP Server</span>
+      <span style="font-size:2rem;font-weight:800;letter-spacing:-0.03em;">$0<span style="font-size:0.9rem;font-weight:400;color:var(--muted);"> forever</span></span>
+      <span style="font-size:0.85rem;color:var(--muted);">AI assistant access to your cluster. Free &amp; open source.</span>
+      <a href="#pricing" style="margin-top:0.5rem;font-size:0.82rem;color:var(--teal);">See what's included →</a>
     </div>
 
-    <!-- Product 2: Promtops Agent -->
-    <div class="product-card paid">
-      <div class="product-card-header">
-        <div class="product-tag tag-paid">Paid · AWS Marketplace</div>
-        <h3>Promtops Agent</h3>
-        <p class="product-desc">Hooks into Alertmanager. When an alert fires, the agent runs the full diagnostic engine and posts a complete RCA to Slack — automatically, at any hour.</p>
-      </div>
-      <div class="product-card-body">
-        <div class="product-price">$199<span>/month</span></div>
-        <p style="font-size:0.78rem;color:var(--amber);font-weight:600;margin-bottom:0.25rem;">1 cluster only — need more? See Enterprise.</p>
-        <ul class="product-features">
-          <li>Alertmanager → Slack in under 60 seconds</li>
-          <li>BYOK — Bedrock, Anthropic, or OpenAI</li>
-          <li>Deduplication — alert storms = one thread</li>
-          <li>Runs inside your VPC — zero data egress</li>
-          <li>AWS Marketplace billing — use existing AWS spend</li>
-        </ul>
-        <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank">Subscribe on AWS Marketplace</a>
-      </div>
+    <div style="background:var(--surface2);border:1px solid var(--amber);border-radius:var(--radius-lg);padding:1.5rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--amber);">Promtops Agent</span>
+      <span style="font-size:2rem;font-weight:800;letter-spacing:-0.03em;">$199<span style="font-size:0.9rem;font-weight:400;color:var(--muted);"> /month</span></span>
+      <span style="font-size:0.85rem;color:var(--muted);">Automated 3 AM incident response. <strong style="color:var(--amber);">1 cluster.</strong></span>
+      <a href="#pricing" style="margin-top:0.5rem;font-size:0.82rem;color:var(--amber);">See what's included →</a>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:1.5rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--purple);">Enterprise</span>
+      <span style="font-size:2rem;font-weight:800;letter-spacing:-0.03em;">$699<span style="font-size:0.9rem;font-weight:400;color:var(--muted);"> /month</span></span>
+      <span style="font-size:0.85rem;color:var(--muted);">Unlimited clusters, Jira, SSO, audit log, SOC 2.</span>
+      <a href="#pricing" style="margin-top:0.5rem;font-size:0.82rem;color:var(--teal);">See what's included →</a>
     </div>
 
   </div>
-  <p style="text-align:center;margin-top:1.25rem;font-size:0.875rem;color:var(--muted);">Your on-call engineer costs $150/hr. One prevented 3 AM page pays for <strong style="color:var(--text);">9 months</strong> of Promtops.</p>
 </div>
 
 <hr class="divider" />
