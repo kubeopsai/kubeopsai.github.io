@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KubeOpsAI — Kubernetes Observability &amp; Autonomous Incident Response</title>
-  <meta name="description" content="Free MCP server gives AI assistants read-only access to your Kubernetes cluster. Promtops Agent automates 3 AM incident response — Alertmanager to Slack RCA in under 60 seconds." />
-  <meta name="keywords" content="Kubernetes, MCP, observability, Loki, Prometheus, Tempo, Amazon Q, Claude, Bedrock, EKS, DevOps, AI, incident response, Alertmanager, Slack" />
+  <title>KubeOpsAI — AWS Incident Reconstruction</title>
+  <meta name="description" content="AWS incident reconstruction: an evidence-cited chain of events from CloudTrail, AWS Config and Kubernetes, where causality comes from timestamp ordering rather than a language model's guess. Plus a free MCP server for your AI assistant." />
+  <meta name="keywords" content="AWS incident reconstruction, CloudTrail, AWS Config, root cause analysis, post-incident review, postmortem, Kubernetes, MCP, EKS, Loki, Prometheus, incident forensics, audit evidence" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kubeopsai.net/" />
-  <meta property="og:title" content="KubeOpsAI — Kubernetes Observability &amp; Autonomous Incident Response" />
-  <meta property="og:description" content="Free MCP server for AI assistants. Promtops Agent automates 3 AM incident response — Alertmanager to Slack RCA in under 60 seconds." />
+  <meta property="og:title" content="KubeOpsAI — AWS Incident Reconstruction" />
+  <meta property="og:description" content="An evidence-cited chain of events from CloudTrail, AWS Config and Kubernetes. Causality from timestamp ordering, not a model's guess. Free MCP server included." />
   <meta property="og:image" content="https://kubeopsai.net/logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="KubeOpsAI — Kubernetes Observability &amp; Autonomous Incident Response" />
-  <meta name="twitter:description" content="Free MCP server for AI assistants. Promtops Agent automates 3 AM incident response." />
+  <meta name="twitter:title" content="KubeOpsAI — AWS Incident Reconstruction" />
+  <meta name="twitter:description" content="An evidence-cited chain of events from CloudTrail, AWS Config and Kubernetes. Free MCP server included." />
   <meta name="twitter:image" content="https://kubeopsai.net/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -343,13 +343,14 @@
 <!-- HERO -->
 <div class="hero-wrap">
   <div class="hero">
-    <div class="hero-badge">Two products. One mission.</div>
-    <h1>Stop debugging Kubernetes.<br/>Start <em>understanding</em> it.</h1>
-    <p class="hero-sub">A free MCP server gives your AI assistant read-only access to your entire cluster. When alerts fire at 3 AM, Promtops Agent investigates and posts a root-cause analysis to Slack — before anyone opens their laptop.</p>
+    <div class="hero-badge">AWS incident reconstruction</div>
+    <h1>Every AI tool guesses the cause.<br/>Ours shows the <em>chain of events</em>.</h1>
+    <p class="hero-sub">Ask what happened. Promtops reconstructs the infrastructure chain from CloudTrail, AWS Config and Kubernetes — and every link cites a source event ID, timestamp and actor. Causality comes from timestamp ordering and declared resource relationships, not from a language model's opinion.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank">Get Promtops Agent — $199/mo per cluster</a>
+      <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank">Get Promtops — $199/mo, 1 cluster</a>
       <a class="btn btn-secondary" href="https://github.com/kubeopsai/k8s-telemetry-mcp" target="_blank">Free MCP Server →</a>
     </div>
+    <p style="margin-top:1.75rem;font-size:0.85rem;color:var(--muted2);">Stop spending 90 minutes in the CloudTrail console the morning after.</p>
   </div>
 </div>
 
@@ -365,16 +366,16 @@
     </div>
 
     <div style="background:var(--surface2);border:1px solid var(--amber);border-radius:var(--radius-lg);padding:1.5rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--amber);">Promtops Agent</span>
+      <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--amber);">Promtops</span>
       <span style="font-size:2rem;font-weight:800;letter-spacing:-0.03em;">$199<span style="font-size:0.9rem;font-weight:400;color:var(--muted);"> /month</span></span>
-      <span style="font-size:0.85rem;color:var(--muted);">Automated 3 AM incident response. <strong style="color:var(--amber);">1 cluster.</strong></span>
+      <span style="font-size:0.85rem;color:var(--muted);">Evidence-cited incident reconstruction. <strong style="color:var(--amber);">1 cluster.</strong></span>
       <a href="#pricing" style="margin-top:0.5rem;font-size:0.82rem;color:var(--amber);">See what's included →</a>
     </div>
 
     <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:1.5rem;display:flex;flex-direction:column;gap:0.5rem;">
       <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--purple);">Enterprise</span>
       <span style="font-size:2rem;font-weight:800;letter-spacing:-0.03em;">$699<span style="font-size:0.9rem;font-weight:400;color:var(--muted);"> /month</span></span>
-      <span style="font-size:0.85rem;color:var(--muted);">Unlimited clusters, Jira, SSO, audit log, SOC 2.</span>
+      <span style="font-size:0.85rem;color:var(--muted);">Unlimited clusters, Jira, audit log, private LLM endpoint.</span>
       <a href="#pricing" style="margin-top:0.5rem;font-size:0.82rem;color:var(--teal);">See what's included →</a>
     </div>
 
@@ -482,19 +483,19 @@
       </div>
       <div class="story-card-body">
         <p>The free tool is great — when you're awake and at your desk. But the worst incidents don't happen at 2 PM on a Tuesday. They happen at 3 AM on a Saturday, when nobody is sitting in front of Claude Desktop.</p>
-        <p><strong>Promtops Agent</strong> closes that gap. It hooks directly into Alertmanager. The moment an alert fires, it runs the same investigation automatically — no human prompt needed — and posts a complete root-cause analysis to your Slack incident channel before PagerDuty even wakes anyone up.</p>
+        <p><strong>Promtops Agent</strong> closes that gap. It hooks directly into Alertmanager. The moment an alert fires, it runs the same investigation automatically — no human prompt needed — and posts an evidence-cited root-cause analysis to your Slack incident channel before PagerDuty even wakes anyone up.</p>
         <div class="story-compare">
           <div class="story-compare-row"><span class="compare-label">Without Promtops Agent</span><span class="compare-val" style="color:var(--red)">Paged at 3 AM → 25 min triage → fix → back to sleep at 4:30</span></div>
           <div class="story-compare-row"><span class="compare-label">With Promtops Agent</span><span class="compare-val" style="color:var(--green)">Paged at 3 AM → RCA already in Slack → fix → back to sleep by 3:10</span></div>
           <div class="story-compare-row"><span class="compare-label">What the agent does</span><span class="compare-val">Investigates, correlates, explains</span></div>
           <div class="story-compare-row"><span class="compare-label">What your engineer does</span><span class="compare-val">Reads the RCA, runs the fix</span></div>
-          <div class="story-compare-row"><span class="compare-label">Cost</span><span class="compare-val">$199/mo per cluster — less than 2 hours of on-call time</span></div>
+          <div class="story-compare-row"><span class="compare-label">Cost</span><span class="compare-val">$199/mo for 1 cluster — less than 2 hours of on-call time</span></div>
         </div>
         <div class="story-callout callout-upgrade">
           <span class="callout-icon">🔒</span>
           <div><strong>Read-only by design.</strong> The agent never touches your cluster — it only reads. Your engineer still makes the call and runs the fix. That's exactly why security teams approve it without a lengthy review.</div>
         </div>
-        <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank" style="align-self:flex-start;margin-top:0.5rem;">Subscribe on AWS Marketplace — $199/mo per cluster</a>
+        <a class="btn btn-primary" href="https://aws.amazon.com/marketplace" target="_blank" style="align-self:flex-start;margin-top:0.5rem;">Subscribe on AWS Marketplace — $199/mo, 1 cluster</a>
       </div>
     </div>
 
@@ -570,7 +571,7 @@
 
   <div class="security-banner">
     <div class="icon">🔒</div>
-    <p><strong>Security first.</strong> All 22 tools are strictly read-only. PII, secrets, tokens, and credentials are redacted before reaching your AI assistant. Communicates over stdio via <code>kubectl exec</code> — no ingress, no exposed ports, no new attack surface.</p>
+    <p><strong>Security first.</strong> All 23 tools are strictly read-only — no writes, no scaling, no restarts. Common secret and PII patterns are redacted before output reaches your AI assistant. Communicates over stdio via <code>kubectl exec</code> — no ingress, no exposed ports, no API key to rotate.</p>
   </div>
 </div>
 
@@ -578,9 +579,9 @@
 
 <!-- PROMTOPS AGENT SECTION -->
 <div class="section" id="agent">
-  <div class="section-label">Promtops Agent — $199/mo per cluster</div>
+  <div class="section-label">Promtops Agent — $199/mo, 1 cluster</div>
   <h2>3 AM alert. RCA in Slack. Nobody woken up.</h2>
-  <p class="section-sub">Alertmanager fires a webhook. The agent runs the full diagnostic engine across logs, metrics, events, and deployments. A complete root-cause analysis lands in Slack before your on-call engineer opens their laptop.</p>
+  <p class="section-sub">Alertmanager fires a webhook. The agent runs the full diagnostic engine across logs, metrics, events, and deployments. A root-cause analysis lands in Slack before your on-call engineer opens their laptop.</p>
 
   <div class="flow">
     <div class="flow-step">
@@ -603,7 +604,7 @@
     <div class="flow-arrow">→</div>
     <div class="flow-step">
       <div class="flow-icon">🔧</div>
-      <div class="flow-label">22 Tools</div>
+      <div class="flow-label">23 tools</div>
       <div class="flow-sub">logs, metrics, events</div>
     </div>
     <div class="flow-arrow">→</div>
@@ -647,7 +648,7 @@
 
   <div class="security-banner" style="margin-top:1.5rem;">
     <div class="icon">🔑</div>
-    <p><strong>BYOK — Bring Your Own Key.</strong> The agent runs entirely inside your VPC. You provide your own Bedrock, Anthropic, or OpenAI key. Your logs, metrics, and traces never leave your cluster. We never see your data or your tokens.</p>
+    <p><strong>BYOK — Bring Your Own Key.</strong> The agent runs inside your VPC and you provide your own Bedrock, Anthropic, or OpenAI key, so inference is billed to you at cost and governed by your agreement with that provider. We never see your data or your tokens — there is no KubeOpsAI backend for them to reach. Choose Bedrock and the prompt never leaves AWS.</p>
   </div>
 </div>
 
@@ -657,18 +658,18 @@
 <div class="security-hero" id="security">
   <div class="security-hero-inner">
     <div class="security-hero-badge">🔒 Security &amp; Privacy</div>
-    <h2>Your data <em>never leaves your VPC.</em><br/>That's not a feature. It's the architecture.</h2>
-    <p class="security-hero-sub">Every other incident response tool sends your logs, metrics, and traces to their SaaS platform. KubeOpsAI runs entirely inside your cluster. Your data stays in your infrastructure — always.</p>
+    <h2>Your telemetry <em>never reaches us.</em><br/>That's not a policy. It's the architecture.</h2>
+    <p class="security-hero-sub">Every other incident response tool sends your logs, metrics, and traces to their SaaS platform. KubeOpsAI has no control plane and no SaaS backend: the agent runs inside your cluster and we never receive your data. It leaves your VPC in exactly two places you choose — the report posted to your Slack, and the prompt sent to your own LLM provider. Pick Bedrock and it never leaves AWS.</p>
     <div class="security-pillars">
       <div class="security-pillar">
         <div class="security-pillar-icon">🏠</div>
         <h3>Runs in your cluster</h3>
-        <p>The agent is a pod inside your EKS cluster. It queries your observability stack directly over the cluster network. Nothing leaves your VPC.</p>
+        <p>The agent is a pod inside your EKS cluster. It queries your observability stack directly over the cluster network, so collection never crosses your VPC boundary and needs no outbound path to us.</p>
       </div>
       <div class="security-pillar">
         <div class="security-pillar-icon">👁️</div>
         <h3>Read-only by design</h3>
-        <p>All tools are strictly read-only. No write, delete, or mutation operations exist in the codebase. The agent investigates — it cannot change anything.</p>
+        <p>No tool can create, modify or delete an AWS or Kubernetes resource — those operations do not exist in the codebase. The agent investigates and reports; it writes only where you point it, to Slack and your ticketing system.</p>
       </div>
       <div class="security-pillar">
         <div class="security-pillar-icon">🔑</div>
@@ -677,8 +678,8 @@
       </div>
       <div class="security-pillar">
         <div class="security-pillar-icon">🧹</div>
-        <h3>PII auto-redacted</h3>
-        <p>Secrets, tokens, AWS keys, JWTs, and database connection strings are scrubbed before any data reaches the LLM.</p>
+        <h3>Secrets scrubbed</h3>
+        <p>AWS keys, JWTs, bearer tokens, <code>password=</code> assignments, and database URIs are redacted before data reaches the LLM. Defence in depth, documented in full.</p>
       </div>
       <div class="security-pillar">
         <div class="security-pillar-icon">🌐</div>
@@ -688,7 +689,7 @@
       <div class="security-pillar">
         <div class="security-pillar-icon">📋</div>
         <h3>Scoped RBAC</h3>
-        <p>A minimal ClusterRole grants read-only access to events, nodes, deployments, HPAs, and replicasets — nothing more.</p>
+        <p>A minimal ClusterRole grants <code>get</code> and <code>list</code> on events, nodes, pods, deployments, replicasets and HPAs — and nothing else. No secrets, no <code>exec</code>, no write verbs, no wildcards.</p>
       </div>
     </div>
     <div class="security-quote">
@@ -704,7 +705,7 @@
 <div class="section" id="pricing">
   <div class="section-label">Pricing</div>
   <h2>Simple, transparent pricing</h2>
-  <p class="section-sub">Both products available on AWS Marketplace. Charges appear on your monthly AWS invoice — use your existing committed spend.</p>
+  <p class="section-sub">Promtops is sold on AWS Marketplace, so charges appear on your monthly AWS invoice and draw on your existing committed spend. The MCP server is free and open source on GitHub — no subscription, no account needed.</p>
 
   <div class="pricing-grid">
     <div class="pricing-card">
@@ -713,7 +714,7 @@
       <div class="pricing-desc">Manual querying via AI assistants during business hours</div>
       <hr class="pricing-divider" />
       <ul class="pricing-features">
-        <li>22 tools, fully unlocked</li>
+        <li>23 tools, fully unlocked</li>
         <li>Amazon Q, Claude, Kiro, Cursor</li>
         <li>Loki, Prometheus, Tempo, K8s API, AWS</li>
         <li>Apache 2.0 open source</li>
@@ -723,17 +724,20 @@
     <div class="pricing-card featured">
       <div class="pricing-badge">Most Popular</div>
       <div class="pricing-price">$199<span>/month</span></div>
-      <div class="pricing-tier">Promtops Agent — Automated</div>
-      <div class="pricing-desc">Autonomous 3 AM incident responder — <strong style="color:var(--amber)">1 cluster</strong>. Need more clusters? See Enterprise.</div>
+      <div class="pricing-tier">Promtops — Reconstruction</div>
+      <div class="pricing-desc">Incident reconstruction plus automated alert triage — <strong style="color:var(--amber)">1 cluster</strong>. Need more clusters? See Enterprise.</div>
       <hr class="pricing-divider" />
       <ul class="pricing-features">
+        <li><strong style="color:var(--amber)">Evidence-cited chain of events</strong> — every link carries a source event ID</li>
+        <li><strong style="color:var(--amber)">Deterministic causality</strong> — timestamp ordering, not model opinion</li>
+        <li><strong style="color:var(--amber)">States what it could not establish</strong> — no hidden gaps</li>
+        <li>Reconstruct <strong>past</strong> incidents, not just live alerts</li>
+        <li>AWS Config field diffs — what actually changed, and who changed it</li>
+        <li>Markdown that pastes into your postmortem + separable evidence appendix</li>
         <li>Alertmanager → Slack RCA in &lt;60 seconds</li>
-        <li>BYOK — Bedrock, Anthropic, or OpenAI</li>
-        <li>Alert deduplication — one thread per incident</li>
-        <li>PagerDuty &amp; OpsGenie integration</li>
-        <li>Custom alert routing per team &amp; channel</li>
-        <li><strong style="color:var(--teal)">Runs inside your VPC — zero data egress</strong></li>
-        <li><strong style="color:var(--teal)">Your data never leaves your cluster</strong></li>
+        <li>BYOK — Bedrock, Anthropic, or OpenAI. Inference at cost.</li>
+        <li>PagerDuty &amp; OpsGenie integration, custom alert routing</li>
+        <li><strong style="color:var(--teal)">No control plane — your telemetry never reaches us</strong></li>
         <li>AWS Marketplace — use existing AWS spend</li>
         <li>Email support — 2 business day response</li>
       </ul>
@@ -741,7 +745,7 @@
     <div class="pricing-card">
       <div class="pricing-tier">Enterprise</div>
       <div class="pricing-price">$699<span>/month</span></div>
-      <div class="pricing-desc">Unlimited clusters, compliance-ready, full integrations</div>
+      <div class="pricing-desc">Unlimited clusters, full integrations, auditable</div>
       <hr class="pricing-divider" />
       <ul class="pricing-features">
         <li>Everything in Promtops Agent</li>
@@ -749,12 +753,9 @@
         <li>Jira ticket auto-creation from RCA</li>
         <li>Scheduled digests — daily/weekly incident summaries</li>
         <li>Audit log to S3 or CloudWatch — every tool call logged</li>
-        <li>SSO / SAML</li>
-        <li>Custom data retention policies</li>
-        <li>SOC 2 report on request</li>
-        <li>Custom LLM endpoint — private Bedrock or Azure OpenAI</li>
+        <li>Custom LLM endpoint — private Bedrock or any OpenAI-compatible gateway</li>
         <li>Dedicated onboarding &amp; setup call</li>
-        <li>Priority support — 4-hour response SLA</li>
+        <li>Priority support — 4 business hours to first response</li>
         <li>Private Slack channel with your team</li>
       </ul>
     </div>
@@ -786,9 +787,14 @@
           <td>GitHub Issues</td>
         </tr>
         <tr>
-          <td>Promtops Agent ($199/mo · 1 cluster)</td>
+          <td>Promtops — Reconstruction ($199/mo · 1 cluster)</td>
           <td>2 business days</td>
           <td>Email + GitHub Issues</td>
+        </tr>
+        <tr>
+          <td>Promtops — Enterprise ($699/mo · unlimited clusters)</td>
+          <td>4 business hours</td>
+          <td>Email + private Slack channel</td>
         </tr>
       </tbody>
     </table>
@@ -819,7 +825,7 @@
   <p class="section-sub">We build Kubernetes observability tooling for AI assistants and autonomous incident response.</p>
   <div class="about-grid">
     <p>Engineering teams spend too much time switching between dashboards, running manual queries, and piecing together context during incidents. We built K8s Telemetry MCP Server to eliminate that friction — letting your AI assistant do the querying while you focus on fixing the problem.</p>
-    <p>Promtops Agent takes it further: when nobody is at a keyboard, the agent runs the full diagnostic engine automatically and delivers a complete root-cause analysis to Slack. One prevented 3 AM page pays for months of subscription.</p>
+    <p>Promtops Agent takes it further: when nobody is at a keyboard, the agent runs the full diagnostic engine automatically and delivers a root-cause analysis to Slack. One prevented 3 AM page pays for months of subscription.</p>
   </div>
 </div>
 
